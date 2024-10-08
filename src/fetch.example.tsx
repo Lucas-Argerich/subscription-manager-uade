@@ -1,7 +1,7 @@
 import { collection, getDocs, QueryDocumentSnapshot, QuerySnapshot } from 'firebase/firestore'
-import { db } from './firebase/app'
+import { db } from 'firebase'
 import { useEffect, useState } from 'react'
-import { UserDocument } from './firebase/types'
+import { UserDocument } from 'firebase/types'
 
 export default function App() {
   // estados
