@@ -20,8 +20,15 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-
-    "baseUrl": "src"
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": ["src/components/*"],
+      "@examples/*": ["src/examples/*"],
+      "@assets/*": ["src/assets/*"],
+      "@layouts/*": ["src/layouts/*"],
+      "@firebase": ["src/firebase/index"],
+      "@firebase/*": ["src/firebase/*"],
+    }
   },
   "include": ["src"],
   "exclude": ["src/examples"]

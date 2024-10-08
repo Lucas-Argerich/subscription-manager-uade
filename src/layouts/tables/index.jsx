@@ -13,34 +13,34 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import React, { useState } from "react";
+import React, { useState } from 'react'
 
 // @mui material components
-import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
+import Grid from '@mui/material/Grid'
+import Card from '@mui/material/Card'
 
 
 // Material Dashboard 2 React components
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
-import MDForm from "components/MDForm";
+import MDBox from '@components/MDBox'
+import MDTypography from '@components/MDTypography'
+import MDForm from '@components/MDForm'
 
 // Material Dashboard 2 React example components
-import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import Footer from "examples/Footer";
-import DataTable from "examples/Tables/DataTable";
+import DashboardLayout from '@examples/LayoutContainers/DashboardLayout'
+import DashboardNavbar from '@examples/Navbars/DashboardNavbar'
+import Footer from '@examples/Footer'
+import DataTable from '@examples/Tables/DataTable'
 
 // Data
-import projectsTableData from "layouts/tables/data/projectsTableData";
+import projectsTableData from '@layouts/tables/data/projectsTableData'
 
 function Tables() {
-  const { columns: pColumns, rows: pRows } = projectsTableData();
+  const { columns: pColumns, rows: pRows } = projectsTableData()
 
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
 
-  const abreForm = () => setOpen(true);
-  const cierraForm = () => setOpen(false);
+  const abreForm = () => setOpen(true)
+  const cierraForm = () => setOpen(false)
 
 
   return (
@@ -50,7 +50,7 @@ function Tables() {
       
       <MDForm
         onClick={abreForm}
-        style={{ textDecoration: "none", cursor: "pointer" }}
+        style={{ textDecoration: 'none', cursor: 'pointer' }}
       >
       </MDForm>
       
@@ -88,7 +88,7 @@ function Tables() {
       </MDBox>
       <Footer />
     </DashboardLayout>
-  );
+  )
 }
 
-export default Tables;
+export default Tables

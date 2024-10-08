@@ -13,38 +13,38 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useState } from "react";
+import { useState } from 'react'
 
 // react-router-dom components
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom'
 
 // @mui material components
-import Card from "@mui/material/Card";
-import Switch from "@mui/material/Switch";
-import Grid from "@mui/material/Grid";
-import MuiLink from "@mui/material/Link";
+import Card from '@mui/material/Card'
+import Switch from '@mui/material/Switch'
+import Grid from '@mui/material/Grid'
+import MuiLink from '@mui/material/Link'
 
 // @mui icons
-import FacebookIcon from "@mui/icons-material/Facebook";
-import GitHubIcon from "@mui/icons-material/GitHub";
-import GoogleIcon from "@mui/icons-material/Google";
+import FacebookIcon from '@mui/icons-material/Facebook'
+import GitHubIcon from '@mui/icons-material/GitHub'
+import GoogleIcon from '@mui/icons-material/Google'
 
 // Material Dashboard 2 React components
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
-import MDInput from "components/MDInput";
-import MDButton from "components/MDButton";
+import MDBox from '@components/MDBox'
+import MDTypography from '@components/MDTypography'
+import MDInput from '@components/MDInput'
+import MDButton from '@components/MDButton'
 
 // Authentication layout components
-import BasicLayout from "layouts/authentication/components/BasicLayout";
+import BasicLayout from '@layouts/authentication/components/BasicLayout'
 
 // Images
-import bgImage from "assets/images/bg-sign-in-basic.jpeg";
+import bgImage from 'assets/images/bg-sign-in-basic.jpeg'
 
 function Basic() {
-  const [rememberMe, setRememberMe] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false)
 
-  const handleSetRememberMe = () => setRememberMe(!rememberMe);
+  const handleSetRememberMe = () => setRememberMe(!rememberMe)
 
   return (
     <BasicLayout image={bgImage}>
@@ -96,7 +96,7 @@ function Basic() {
                 fontWeight="regular"
                 color="text"
                 onClick={handleSetRememberMe}
-                sx={{ cursor: "pointer", userSelect: "none", ml: -1 }}
+                sx={{ cursor: 'pointer', userSelect: 'none', ml: -1 }}
               >
                 &nbsp;&nbsp;Seguir logueado
               </MDTypography>
@@ -108,7 +108,7 @@ function Basic() {
             </MDBox>
             <MDBox mt={3} mb={1} textAlign="center">
               <MDTypography variant="button" color="text">
-                ¿No tenes una cuenta?{" "}
+                ¿No tenes una cuenta?{' '}
                 <MDTypography
                   component={Link}
                   to="/authentication/sign-up"
@@ -125,7 +125,7 @@ function Basic() {
         </MDBox>
       </Card>
     </BasicLayout>
-  );
+  )
 }
 
-export default Basic;
+export default Basic
