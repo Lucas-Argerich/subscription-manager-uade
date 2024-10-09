@@ -10,21 +10,13 @@ import Sidenav from '@examples/Sidenav'
 import CssBaseline from '@mui/material/CssBaseline'
 import Icon from '@mui/material/Icon'
 import { ThemeProvider } from '@mui/material/styles'
-import brandDark from 'assets/images/logo-ct-dark.png'
-import brandWhite from 'assets/images/logo-ct.png'
+import brandDark from '@assets/images/logo-ct-dark.png'
+import brandWhite from '@assets/images/logo-ct.png'
 import { useEffect, useMemo, useState } from 'react'
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import rtlPlugin from 'stylis-plugin-rtl'
 import { setMiniSidenav, setOpenConfigurator, useMaterialUIController } from './context'
 import routes from './routes'
-
-// Define a type for the route object
-interface RouteType {
-  key: string
-  route?: string
-  component: JSX.Element
-  collapse?: RouteType[]
-}
 
 export default function App() {
   const [controller, dispatch] = useMaterialUIController()
@@ -81,7 +73,7 @@ export default function App() {
     if (document.scrollingElement) document.scrollingElement.scrollTop = 0
   }, [pathname])
 
-  const getRoutes = (allRoutes: RouteType[]): React.ReactNode =>
+  const getRoutes = (allRoutes) =>
     allRoutes.map((route) => {
       if (route.collapse) {
         return getRoutes(route.collapse)

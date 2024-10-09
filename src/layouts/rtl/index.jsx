@@ -38,7 +38,7 @@ import OrdersOverview from '@layouts/rtl/components/OrdersOverview'
 import Projects from '@layouts/rtl/components/Projects'
 
 // Material Dashboard 2 React contexts
-import { setDirection, useMaterialUIController } from 'context'
+import { setDirection, useMaterialUIController } from '@/context'
 
 function RTL() {
   const [, dispatch] = useMaterialUIController()

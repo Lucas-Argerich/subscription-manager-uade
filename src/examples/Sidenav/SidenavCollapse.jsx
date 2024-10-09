@@ -31,17 +31,9 @@ import {
 } from 'examples/Sidenav/styles/sidenavCollapse'
 
 // Material Dashboard 2 React context
-import { useMaterialUIController } from 'context'
+import { useMaterialUIController } from '@/context'
 
-// Define props interface
-interface SidenavCollapseProps {
-  icon: React.ReactNode
-  name: string
-  active?: boolean
-  [x: string]: unknown // To allow additional props
-}
-
-function SidenavCollapse({ icon, name, active = false, ...rest }: SidenavCollapseProps) {
+function SidenavCollapse({ icon, name, active = false, ...rest }) {
   const [controller] = useMaterialUIController()
   const { miniSidenav, transparentSidenav, whiteSidenav, darkMode, sidenavColor } = controller
 

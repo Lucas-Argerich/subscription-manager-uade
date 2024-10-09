@@ -42,10 +42,10 @@ import MDTypography from '@components/MDTypography'
 import configs from 'examples/Charts/RadarChart/configs'
 
 // Material Dashboard 2 React base styles
-import colors from 'assets/theme/base/colors'
+import colors from '@assets/theme/base/colors'
 
 // Material Dashboard 2 React helper functions
-import rgba from 'assets/theme/functions/rgba'
+import rgba from '@assets/theme/functions/rgba'
 
 ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend)
 

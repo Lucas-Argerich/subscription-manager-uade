@@ -18,7 +18,7 @@ Coded by www.creative-tim.com
  */
 
 // Material Dashboard 2 React helper functions
-import rgba from 'assets/theme-dark/functions/rgba'
+import rgba from '@assets/theme-dark/functions/rgba'
 
 function gradientChartLine(
   chart: CanvasRenderingContext2D, // Type for the canvas context
@@ -26,7 +26,7 @@ function gradientChartLine(
   opacity: number = 0.2 // Default opacity
 ): CanvasGradient {
   // Return type for gradient
-  const ctx = chart.getContext('2d')
+  const ctx = chart
   const gradientStroke = ctx.createLinearGradient(0, 230, 0, 50)
   const primaryColor = rgba(color, opacity).toString()
 

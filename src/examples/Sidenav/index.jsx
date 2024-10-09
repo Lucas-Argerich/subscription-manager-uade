@@ -41,7 +41,7 @@ import {
   setMiniSidenav,
   setTransparentSidenav,
   setWhiteSidenav
-} from 'context'
+} from '@/context'
 
 // Define the types for route objects
 

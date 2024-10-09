@@ -41,13 +41,13 @@ import MDBox from '@components/MDBox'
 import MDTypography from '@components/MDTypography'
 
 // Material Dashboard 2 React helper functions
-import gradientChartLine from 'assets/theme/functions/gradientChartLine'
+import gradientChartLine from '@assets/theme/functions/gradientChartLine'
 
 // GradientLineChart configurations
 import configs from 'examples/Charts/LineCharts/GradientLineChart/configs'
 
 // Material Dashboard 2 React base styles
-import colors from 'assets/theme/base/colors'
+import colors from '@assets/theme/base/colors'
 
 ChartJS.register(
   CategoryScale,

@@ -15,7 +15,7 @@ Coded by www.creative-tim.com
 
 // Material Dashboard 2 React helper functions
 import { IconProps } from '@mui/material'
-import pxToRem from 'assets/theme-dark/functions/pxToRem'
+import pxToRem from '@assets/theme-dark/functions/pxToRem'
 
 const icon = {
   defaultProps: {
