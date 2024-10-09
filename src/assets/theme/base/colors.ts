@@ -30,7 +30,7 @@ const colors = {
   },
 
   transparent: {
-    main: 'transparent',
+    main: '#00000000',
   },
 
   white: {
