@@ -31,7 +31,7 @@ import MDBox from '@components/MDBox'
 import MDTypography from '@components/MDTypography'
 
 // PolarChart configurations
-import configs from 'examples/Charts/PolarChart/configs'
+import configs from '@examples/Charts/PolarChart/configs'
 
 ChartJS.register(RadialLinearScale, ArcElement, Tooltip, Legend)
 

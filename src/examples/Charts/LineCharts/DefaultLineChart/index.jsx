@@ -41,7 +41,7 @@ import MDBox from '@components/MDBox'
 import MDTypography from '@components/MDTypography'
 
 // DefaultLineChart configurations
-import configs from 'examples/Charts/LineCharts/DefaultLineChart/configs'
+import configs from '@examples/Charts/LineCharts/DefaultLineChart/configs'
 
 // Material Dashboard 2 React base styles
 import colors from '@assets/theme/base/colors'

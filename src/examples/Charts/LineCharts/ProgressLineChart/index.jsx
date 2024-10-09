@@ -42,7 +42,7 @@ import MDTypography from '@components/MDTypography'
 import MDProgress from '@components/MDProgress'
 
 // ProgressLineChart configurations
-import configs from 'examples/Charts/LineCharts/ProgressLineChart/config'
+import configs from '@examples/Charts/LineCharts/ProgressLineChart/config'
 
 ChartJS.register(
   CategoryScale,

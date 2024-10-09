@@ -31,7 +31,7 @@ import MDBox from '@components/MDBox'
 import MDTypography from '@components/MDTypography'
 
 // DefaultDoughnutChart configurations
-import configs from 'examples/Charts/DoughnutCharts/DefaultDoughnutChart/configs'
+import configs from '@examples/Charts/DoughnutCharts/DefaultDoughnutChart/configs'
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 

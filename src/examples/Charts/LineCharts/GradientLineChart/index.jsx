@@ -44,7 +44,7 @@ import MDTypography from '@components/MDTypography'
 import gradientChartLine from '@assets/theme/functions/gradientChartLine'
 
 // GradientLineChart configurations
-import configs from 'examples/Charts/LineCharts/GradientLineChart/configs'
+import configs from '@examples/Charts/LineCharts/GradientLineChart/configs'
 
 // Material Dashboard 2 React base styles
 import colors from '@assets/theme/base/colors'

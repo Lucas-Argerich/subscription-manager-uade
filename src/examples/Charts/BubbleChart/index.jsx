@@ -31,7 +31,7 @@ import MDBox from '@components/MDBox'
 import MDTypography from '@components/MDTypography'
 
 // BubbleChart configurations
-import configs from 'examples/Charts/BubbleChart/configs'
+import configs from '@examples/Charts/BubbleChart/configs'
 
 // Material Dashboard 2 React base styles
 import colors from '@assets/theme/base/colors'

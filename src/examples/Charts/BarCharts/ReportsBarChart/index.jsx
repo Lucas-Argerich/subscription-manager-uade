@@ -40,7 +40,7 @@ import MDBox from '@components/MDBox'
 import MDTypography from '@components/MDTypography'
 
 // ReportsBarChart configurations
-import configs from 'examples/Charts/BarCharts/ReportsBarChart/configs'
+import configs from '@examples/Charts/BarCharts/ReportsBarChart/configs'
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 

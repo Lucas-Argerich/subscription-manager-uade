@@ -1,6 +1,4 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable react/function-component-definition */
-/**
+/*
 =========================================================
 * Material Dashboard 2 React - v2.2.0
 =========================================================
