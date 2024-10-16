@@ -37,14 +37,14 @@ import Card from '@mui/material/Card'
 import Icon from '@mui/material/Icon'
 
 // Material Dashboard 2 React components
-import MDBox from '@components/MDBox'
-import MDTypography from '@components/MDTypography'
+import MDBox from '~components/MDBox'
+import MDTypography from '~components/MDTypography'
 
 // DefaultLineChart configurations
-import configs from '@examples/Charts/LineCharts/DefaultLineChart/configs'
+import configs from '~examples/Charts/LineCharts/DefaultLineChart/configs'
 
 // Material Dashboard 2 React base styles
-import colors from '@assets/theme/base/colors'
+import colors from '~assets/theme/base/colors'
 
 ChartJS.register(
   CategoryScale,

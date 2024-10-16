@@ -21,10 +21,10 @@ Coded by www.creative-tim.com
 
 // Material Dashboard 2 React Base Styles
 import { TypographyOptions } from '@mui/material/styles/createTypography'
-import colors from '@assets/theme-dark/base/colors'
+import colors from '~assets/theme-dark/base/colors'
 
 // Material Dashboard 2 React Helper Functions
-import pxToRem from '@assets/theme-dark/functions/pxToRem'
+import pxToRem from '~assets/theme-dark/functions/pxToRem'
 
 const { white } = colors
 

@@ -17,12 +17,12 @@ export default defineConfig({
   root: '.',
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, 'src'),
-      '@components': path.resolve(__dirname, 'src/components'),
-      '@examples': path.resolve(__dirname, 'src/examples'),
-      '@assets': path.resolve(__dirname, 'src/assets'),
-      '@layouts': path.resolve(__dirname, 'src/layouts'),
-      '@firebase': path.resolve(__dirname, 'src/firebase')
+      '~': path.resolve(__dirname, 'src'),
+      '~components': path.resolve(__dirname, 'src/components'),
+      '~examples': path.resolve(__dirname, 'src/examples'),
+      '~assets': path.resolve(__dirname, 'src/assets'),
+      '~layouts': path.resolve(__dirname, 'src/layouts'),
+      '~firebase': path.resolve(__dirname, 'src/firebase')
     }
   }
 })

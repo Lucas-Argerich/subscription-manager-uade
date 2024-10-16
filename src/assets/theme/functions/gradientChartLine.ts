@@ -18,7 +18,7 @@ Coded by www.creative-tim.com
  */
 
 // Material Dashboard 2 React helper functions
-import rgba from '@assets/theme/functions/rgba'
+import rgba from '~assets/theme/functions/rgba'
 
 function gradientChartLine(
   chart: CanvasRenderingContext2D, // Type for the canvas context
