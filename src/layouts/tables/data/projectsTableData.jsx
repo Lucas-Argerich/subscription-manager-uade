@@ -17,12 +17,13 @@ Coded by www.creative-tim.com
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 // Material Dashboard 2 React components
-import MDBox from '@components/MDBox'
-import MDTypography from '@components/MDTypography'
-import MDAvatar from '@components/MDAvatar'
-import MDProgress from '@components/MDProgress'
+import MDBox from '~components/MDBox'
+import MDTypography from '~components/MDTypography'
+import MDAvatar from '~components/MDAvatar'
+import MDProgress from '~components/MDProgress'
 
 // Images
+
 import LogoAsana from '@assets/images/small-logos/logo-asana.svg'
 import logoGithub from '@assets/images/small-logos/github.svg'
 import logoAtlassian from '@assets/images/small-logos/logo-atlassian.svg'
@@ -30,6 +31,7 @@ import logoSlack from '@assets/images/small-logos/logo-slack.svg'
 import logoSpotify from '@assets/images/small-logos/logo-spotify.svg'
 import logoInvesion from '@assets/images/small-logos/logo-invision.svg'
 import MDOptions from '@/components/MDOptions';
+
 
 export default function data() {
 

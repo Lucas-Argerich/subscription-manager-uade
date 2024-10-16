@@ -21,19 +21,21 @@ import Card from '@mui/material/Card'
 
 
 // Material Dashboard 2 React components
-import MDBox from '@components/MDBox'
-import MDTypography from '@components/MDTypography'
-import MDForm from '@components/MDForm'
+import MDBox from '~components/MDBox'
+import MDTypography from '~components/MDTypography'
+import MDForm from '~components/MDForm'
 
 // Material Dashboard 2 React example components
-import DashboardLayout from '@examples/LayoutContainers/DashboardLayout'
-import DashboardNavbar from '@examples/Navbars/DashboardNavbar'
-import Footer from '@examples/Footer'
-import DataTable from '@examples/Tables/DataTable'
+import DashboardLayout from '~examples/LayoutContainers/DashboardLayout'
+import DashboardNavbar from '~examples/Navbars/DashboardNavbar'
+import Footer from '~examples/Footer'
+import DataTable from '~examples/Tables/DataTable'
 
 // Data
+
 import projectsTableData from '@layouts/tables/data/projectsTableData'
 import { Height } from '@mui/icons-material'
+
 
 function Tables() {
   const { columns: pColumns, rows: pRows } = projectsTableData()
