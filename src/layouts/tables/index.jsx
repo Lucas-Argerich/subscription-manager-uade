@@ -32,7 +32,10 @@ import Footer from '~examples/Footer'
 import DataTable from '~examples/Tables/DataTable'
 
 // Data
-import projectsTableData from '~layouts/tables/data/projectsTableData'
+
+import projectsTableData from '@layouts/tables/data/projectsTableData'
+import { Height } from '@mui/icons-material'
+
 
 function Tables() {
   const { columns: pColumns, rows: pRows } = projectsTableData()

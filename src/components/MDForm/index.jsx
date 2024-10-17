@@ -40,7 +40,8 @@ const MDForm = () => {
             p: 4,
             width: 300,
             margin: 'auto',
-            mt: '20%',
+            mt: '3%',
+            height: 'auto',
           }}
         >
           <Typography variant="h6" component="h2" gutterBottom>

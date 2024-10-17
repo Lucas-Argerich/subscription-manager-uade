@@ -35,6 +35,10 @@ import reportsLineChartData from '~layouts/dashboard/data/reportsLineChartData'
 import Projects from '~layouts/dashboard/components/Projects'
 import OrdersOverview from '~layouts/dashboard/components/OrdersOverview'
 
+import WeekendIcon  from '@mui/icons-material/Weekend'
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import StoreIcon from '@mui/icons-material/Store';
+
 function Dashboard() {
   const { sales, tasks } = reportsLineChartData
 
@@ -47,7 +51,7 @@ function Dashboard() {
             <MDBox mb={1.5}>
               <ComplexStatisticsCard
                 color="dark"
-                icon="weekend"
+                icon={<WeekendIcon fontSize="small"/>}
                 title="Suscripciones"
                 count={10}
                 percentage={{
@@ -60,8 +64,8 @@ function Dashboard() {
           </Grid>
           <Grid item xs={12} md={6} lg={3}>
             <MDBox mb={1.5}>
-              <ComplexStatisticsCard
-                icon="leaderboard"
+              <ComplexStatisticsCard                
+                icon={<AttachMoneyIcon fontSize="small"/>}
                 title="Costo Mensual"
                 count="$16000"
                 percentage={{
@@ -76,7 +80,7 @@ function Dashboard() {
             <MDBox mb={1.5}>
               <ComplexStatisticsCard
                 color="success"
-                icon="store"
+                icon={<StoreIcon fontSize="small"/>}
                 title="Algo"
                 count="34k"
                 percentage={{
@@ -91,7 +95,7 @@ function Dashboard() {
             <MDBox mb={1.5}>
               <ComplexStatisticsCard
                 color="primary"
-                icon="person_add"
+                icon={<StoreIcon fontSize="small"/>}
                 title="Algo mas"
                 count="+91"
                 percentage={{

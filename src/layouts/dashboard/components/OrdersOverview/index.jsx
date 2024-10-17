@@ -46,32 +46,27 @@ function OrdersOverview() {
       </MDBox>
       <MDBox p={2}>
         <TimelineItem
-          color="error"
-          icon="warning"
+          color="error"          
           title="Vencimiento Linkedin"
           dateTime="22 DEC 7:20 PM"
         />
         <TimelineItem
-          color="error"
-          icon="inventory_2"
+          color="error"          
           title="Vencimiento Spotify"
           dateTime="21 DEC 11 PM"
         />
         <TimelineItem
-          color="info"
-          icon="shopping_cart"
+          color="error"          
           title="Vencimiento Netflix"
           dateTime="21 DEC 9:34 PM"
         />
         <TimelineItem
-          color="warning"
-          icon="payment"
+          color="error"          
           title="Vencimiento Dinsey+"
           dateTime="20 DEC 2:20 AM"
         />
         <TimelineItem
-          color="primary"
-          icon="vpn_key"
+          color="error"
           title="Vencimiento HBO"
           dateTime="18 DEC 4:54 AM"
           lastItem

@@ -6,14 +6,19 @@ import SignIn from '~layouts/authentication/sign-in'
 import SignUp from '~layouts/authentication/sign-up'
 
 // @mui icons
-import Icon from '@mui/material/Icon'
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import TableViewIcon from '@mui/icons-material/TableView';
+import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
+import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
+import LoginIcon from '@mui/icons-material/Login';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const routes = [
   {
     type: 'collapse',
     name: 'Home',
     key: 'dashboard',
-    icon: <Icon fontSize="small">dashboard</Icon>,
+    icon: <DashboardIcon  fontSize="small"/>,
     route: '/dashboard',
     component: <Dashboard />,
   },
@@ -21,7 +26,7 @@ const routes = [
     type: 'collapse',
     name: 'Suscripciones',
     key: 'tables',
-    icon: <Icon fontSize="small">table_view</Icon>,
+    icon: <TableViewIcon fontSize="small" />,
     route: '/tables',
     component: <Tables />,
   },
@@ -29,7 +34,7 @@ const routes = [
     type: 'collapse',
     name: 'Vencimientos',
     key: 'billing',
-    icon: <Icon fontSize="small">receipt_long</Icon>,
+    icon: <ReceiptLongIcon fontSize="small" />,
     route: '/billing',
     component: <Billing />,
   },
@@ -37,7 +42,7 @@ const routes = [
     type: 'collapse',
     name: 'Credenciales',
     key: 'rtl',
-    icon: <Icon fontSize="small">format_textdirection_r_to_l</Icon>,
+    icon: <AssignmentIndIcon fontSize="small"/>,
     route: '/rtl',
     component: <RTL />,
   },
@@ -45,7 +50,7 @@ const routes = [
     type: 'collapse',
     name: 'Sign In',
     key: 'sign-in',
-    icon: <Icon fontSize="small">login</Icon>,
+    icon: <LoginIcon fontSize="small" />,
     route: '/authentication/sign-in',
     component: <SignIn />,
   },
@@ -53,7 +58,7 @@ const routes = [
     type: 'collapse',
     name: 'Sign Up',
     key: 'sign-up',
-    icon: <Icon fontSize="small">assignment</Icon>,
+    icon: <LogoutIcon fontSize="small" />,
     route: '/authentication/sign-up',
     component: <SignUp />,
   },

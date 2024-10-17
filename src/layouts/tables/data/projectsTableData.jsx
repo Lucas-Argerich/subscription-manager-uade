@@ -14,7 +14,7 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import Icon from '@mui/material/Icon'
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 // Material Dashboard 2 React components
 import MDBox from '~components/MDBox'
@@ -23,14 +23,29 @@ import MDAvatar from '~components/MDAvatar'
 import MDProgress from '~components/MDProgress'
 
 // Images
-import LogoAsana from '~assets/images/small-logos/logo-asana.svg'
-import logoGithub from '~assets/images/small-logos/github.svg'
-import logoAtlassian from '~assets/images/small-logos/logo-atlassian.svg'
-import logoSlack from '~assets/images/small-logos/logo-slack.svg'
-import logoSpotify from '~assets/images/small-logos/logo-spotify.svg'
-import logoInvesion from '~assets/images/small-logos/logo-invision.svg'
+
+import LogoAsana from '@assets/images/small-logos/logo-asana.svg'
+import logoGithub from '@assets/images/small-logos/github.svg'
+import logoAtlassian from '@assets/images/small-logos/logo-atlassian.svg'
+import logoSlack from '@assets/images/small-logos/logo-slack.svg'
+import logoSpotify from '@assets/images/small-logos/logo-spotify.svg'
+import logoInvesion from '@assets/images/small-logos/logo-invision.svg'
+import MDOptions from '@/components/MDOptions';
+
 
 export default function data() {
+
+  const handleEdit = () => {
+    alert('Editar Suscripcion');
+    // Tiene que ir al form
+  };
+  
+  const handleDelete = () => {
+    window.confirm('¿Esta seguro que desa eliminar la suscripcion?');    
+    //service.eliminarSuscripcion
+  };
+
+
   const Project = ({ image, name }) => (
     <MDBox display="flex" alignItems="center" lineHeight={1}>
       <MDAvatar src={image} name={name} size="sm" variant="rounded" />
@@ -79,7 +94,7 @@ export default function data() {
         completion: <Progress color="info" value={60} />,
         action: (
           <MDTypography component="a" href="#" color="text">
-            <Icon>more_vert</Icon>
+            <MDOptions onEdit={handleEdit} onDelete={handleDelete} />
           </MDTypography>
         ),
       },
@@ -98,7 +113,7 @@ export default function data() {
         completion: <Progress color="success" value={100} />,
         action: (
           <MDTypography component="a" href="#" color="text">
-            <Icon>more_vert</Icon>
+            <MoreVertIcon fontSize='Small'onEdit={handleEdit} onDelete={handleDelete} />
           </MDTypography>
         ),
       },
@@ -117,7 +132,7 @@ export default function data() {
         completion: <Progress color="error" value={30} />,
         action: (
           <MDTypography component="a" href="#" color="text">
-            <Icon>more_vert</Icon>
+            <MoreVertIcon fontSize='Small' onEdit={handleEdit} onDelete={handleDelete}/>
           </MDTypography>
         ),
       },
@@ -136,7 +151,7 @@ export default function data() {
         completion: <Progress color="info" value={80} />,
         action: (
           <MDTypography component="a" href="#" color="text">
-            <Icon>more_vert</Icon>
+            <MoreVertIcon fontSize='Small' onEdit={handleEdit} onDelete={handleDelete} />
           </MDTypography>
         ),
       },
@@ -155,7 +170,7 @@ export default function data() {
         completion: <Progress color="error" value={0} />,
         action: (
           <MDTypography component="a" href="#" color="text">
-            <Icon>more_vert</Icon>
+            <MoreVertIcon fontSize='Small' onEdit={handleEdit} onDelete={handleDelete} />
           </MDTypography>
         ),
       },
@@ -174,7 +189,7 @@ export default function data() {
         completion: <Progress color="success" value={100} />,
         action: (
           <MDTypography component="a" href="#" color="text">
-            <Icon>more_vert</Icon>
+            <MoreVertIcon fontSize='Small' onEdit={handleEdit} onDelete={handleDelete} />
           </MDTypography>
         ),
       },
