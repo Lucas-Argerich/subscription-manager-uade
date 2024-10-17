@@ -36,8 +36,8 @@ import Projects from '~layouts/dashboard/components/Projects'
 import OrdersOverview from '~layouts/dashboard/components/OrdersOverview'
 
 import WeekendIcon  from '@mui/icons-material/Weekend'
-import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
-import StoreIcon from '@mui/icons-material/Store';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney'
+import StoreIcon from '@mui/icons-material/Store'
 
 function Dashboard() {
   const { sales, tasks } = reportsLineChartData

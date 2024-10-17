@@ -36,14 +36,14 @@ import MDOptions from '~/components/MDOptions'
 export default function data() {
 
   const handleEdit = () => {
-    alert('Editar Suscripcion');
+    alert('Editar Suscripcion')
     // Tiene que ir al form
-  };
+  }
   
   const handleDelete = () => {
-    window.confirm('¿Esta seguro que desa eliminar la suscripcion?');    
+    window.confirm('¿Esta seguro que desa eliminar la suscripcion?')    
     //service.eliminarSuscripcion
-  };
+  }
 
 
   const Project = ({ image, name }) => (

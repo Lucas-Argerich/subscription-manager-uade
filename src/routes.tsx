@@ -6,12 +6,12 @@ import SignIn from '~layouts/authentication/sign-in'
 import SignUp from '~layouts/authentication/sign-up'
 
 // @mui icons
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import TableViewIcon from '@mui/icons-material/TableView';
-import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
-import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
-import LoginIcon from '@mui/icons-material/Login';
-import LogoutIcon from '@mui/icons-material/Logout';
+import DashboardIcon from '@mui/icons-material/Dashboard'
+import TableViewIcon from '@mui/icons-material/TableView'
+import ReceiptLongIcon from '@mui/icons-material/ReceiptLong'
+import AssignmentIndIcon from '@mui/icons-material/AssignmentInd'
+import LoginIcon from '@mui/icons-material/Login'
+import LogoutIcon from '@mui/icons-material/Logout'
 
 const routes = [
   {

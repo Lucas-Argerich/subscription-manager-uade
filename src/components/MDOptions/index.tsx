@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import IconButton from '@mui/material/IconButton';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+import React, { useState } from 'react'
+import IconButton from '@mui/material/IconButton'
+import Menu from '@mui/material/Menu'
+import MenuItem from '@mui/material/MenuItem'
+import MoreVertIcon from '@mui/icons-material/MoreVert'
 
 interface RowActionsProps {
   onEdit: () => void;
@@ -10,16 +10,16 @@ interface RowActionsProps {
 }
 
 const MDOptions: React.FC<RowActionsProps> = ({ onEdit, onDelete }) => {
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+  const open = Boolean(anchorEl)
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
+    setAnchorEl(event.currentTarget)
+  }
 
   const handleClose = () => {
-    setAnchorEl(null);
-  };
+    setAnchorEl(null)
+  }
 
   return (
     <>
@@ -45,23 +45,23 @@ const MDOptions: React.FC<RowActionsProps> = ({ onEdit, onDelete }) => {
       >
         <MenuItem
           onClick={() => {
-            onEdit();
-            handleClose();
+            onEdit()
+            handleClose()
           }}
         >
           Editar
         </MenuItem>
         <MenuItem
           onClick={() => {
-            onDelete();
-            handleClose();
+            onDelete()
+            handleClose()
           }}
         >
           Eliminar
         </MenuItem>
       </Menu>
     </>
-  );
-};
+  )
+}
 
-export default MDOptions;
+export default MDOptions
