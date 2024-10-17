@@ -16,7 +16,7 @@ Coded by www.creative-tim.com
 import { useState } from 'react'
 
 // react-router-dom components
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 // @mui material components
 import Card from '@mui/material/Card'
@@ -40,11 +40,99 @@ import BasicLayout from '~layouts/authentication/components/BasicLayout'
 
 // Images
 import bgImage from '~assets/images/bg-sign-in-basic.jpeg'
+import { FacebookAuthProvider, GithubAuthProvider, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth'
+import { auth } from '~/firebase'
 
 function Basic() {
+  const navigate = useNavigate()
+
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  const [isSubmitted, setIsSubmitted] = useState(false)
+  const [error, setError] = useState('')
+
   const [rememberMe, setRememberMe] = useState(false)
 
   const handleSetRememberMe = () => setRememberMe(!rememberMe)
+
+  const handleLoginWithFacebook = async (e) => {
+    e.preventDefault()
+
+    if (isSubmitted) return
+    setIsSubmitted(true)
+    setError('')
+
+    try {
+      await signInWithPopup(auth, new FacebookAuthProvider())
+
+      navigate('/dashboard')
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setIsSubmitted(false)
+    }
+  }
+
+  const handleLoginWithGithub = async (e) => {
+    e.preventDefault()
+
+    if (isSubmitted) return
+    setIsSubmitted(true)
+    setError('')
+
+    try {
+      await signInWithPopup(auth, new GithubAuthProvider())
+
+      navigate('/dashboard')
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setIsSubmitted(false)
+    }
+  }
+
+  const handleLoginWithGoogle = async (e) => {
+    e.preventDefault()
+
+    if (isSubmitted) return
+    setIsSubmitted(true)
+    setError('')
+
+    try {
+      await signInWithPopup(auth, new GoogleAuthProvider())
+
+      navigate('/dashboard')
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setIsSubmitted(false)
+    }
+  }
+
+  const handleLoginWithEmailAndPassword = async (e) => {
+    e.preventDefault() 
+    
+    if (isSubmitted) return
+    console.log(email, password)
+    setError('')
+    if (!email || !password) {
+      setError('Complete all inputs to sign up.')
+      return
+    }
+    
+    setIsSubmitted(true)
+
+    try {
+      await signInWithEmailAndPassword(auth, email, password)
+
+      navigate('/dashboard')
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setIsSubmitted(false)
+    }
+  }
 
   return (
     <BasicLayout image={bgImage}>
@@ -61,21 +149,21 @@ function Basic() {
           textAlign="center"
         >
           <MDTypography variant="h4" fontWeight="medium" color="white" mt={1}>
-            Inicio sesion
+            Inicio sesión
           </MDTypography>
           <Grid container spacing={3} justifyContent="center" sx={{ mt: 1, mb: 2 }}>
             <Grid item xs={2}>
-              <MDTypography component={MuiLink} href="#" variant="body1" color="white">
+              <MDTypography component={MuiLink} href="#" variant="body1" color="white" onClick={handleLoginWithFacebook}>
                 <FacebookIcon color="inherit" />
               </MDTypography>
             </Grid>
             <Grid item xs={2}>
-              <MDTypography component={MuiLink} href="#" variant="body1" color="white">
+              <MDTypography component={MuiLink} href="#" variant="body1" color="white" onClick={handleLoginWithGithub}>
                 <GitHubIcon color="inherit" />
               </MDTypography>
             </Grid>
             <Grid item xs={2}>
-              <MDTypography component={MuiLink} href="#" variant="body1" color="white">
+              <MDTypography component={MuiLink} href="#" variant="body1" color="white" onClick={handleLoginWithGoogle}>
                 <GoogleIcon color="inherit" />
               </MDTypography>
             </Grid>
@@ -84,11 +172,18 @@ function Basic() {
         <MDBox pt={4} pb={3} px={3}>
           <MDBox component="form" role="form">
             <MDBox mb={2}>
-              <MDInput type="email" label="Email" fullWidth />
+              <MDInput type="email" label="Email" fullWidth onChange={(e) => setEmail(e.target.value)} />
             </MDBox>
             <MDBox mb={2}>
-              <MDInput type="password" label="Password" fullWidth />
+              <MDInput type="password" label="Password" fullWidth onChange={(e) => setPassword(e.target.value)} />
             </MDBox>
+            {error && (
+              <MDBox>
+                <MDTypography fontSize="0.75rem" color="error">
+                  {error}
+                </MDTypography>
+              </MDBox>
+            )}
             <MDBox display="flex" alignItems="center" ml={-1}>
               <Switch checked={rememberMe} onChange={handleSetRememberMe} />
               <MDTypography
@@ -102,7 +197,13 @@ function Basic() {
               </MDTypography>
             </MDBox>
             <MDBox mt={4} mb={1}>
-              <MDButton variant="gradient" color="info" fullWidth>
+              <MDButton
+                variant="gradient"
+                color="info"
+                fullWidth
+                onClick={handleLoginWithEmailAndPassword}
+                disabled={isSubmitted}
+              >
                 sign in
               </MDButton>
             </MDBox>
