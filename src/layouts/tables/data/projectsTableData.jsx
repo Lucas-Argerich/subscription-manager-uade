@@ -14,7 +14,7 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+import MoreVertIcon from '@mui/icons-material/MoreVert'
 
 // Material Dashboard 2 React components
 import MDBox from '~components/MDBox'
@@ -24,13 +24,13 @@ import MDProgress from '~components/MDProgress'
 
 // Images
 
-import LogoAsana from '@assets/images/small-logos/logo-asana.svg'
-import logoGithub from '@assets/images/small-logos/github.svg'
-import logoAtlassian from '@assets/images/small-logos/logo-atlassian.svg'
-import logoSlack from '@assets/images/small-logos/logo-slack.svg'
-import logoSpotify from '@assets/images/small-logos/logo-spotify.svg'
-import logoInvesion from '@assets/images/small-logos/logo-invision.svg'
-import MDOptions from '@/components/MDOptions';
+import LogoAsana from '~assets/images/small-logos/logo-asana.svg'
+import logoGithub from '~assets/images/small-logos/github.svg'
+import logoAtlassian from '~assets/images/small-logos/logo-atlassian.svg'
+import logoSlack from '~assets/images/small-logos/logo-slack.svg'
+import logoSpotify from '~assets/images/small-logos/logo-spotify.svg'
+import logoInvesion from '~assets/images/small-logos/logo-invision.svg'
+import MDOptions from '~/components/MDOptions'
 
 
 export default function data() {
