@@ -4,6 +4,7 @@ import Billing from '~layouts/billing'
 import RTL from '~layouts/rtl'
 import SignIn from '~layouts/authentication/sign-in'
 import SignUp from '~layouts/authentication/sign-up'
+import ResetPassword from '~/layouts/authentication/reset-password'
 
 // @mui icons
 import DashboardIcon from '@mui/icons-material/Dashboard'
@@ -62,6 +63,10 @@ const routes = [
     route: '/authentication/sign-up',
     component: <SignUp />,
   },
+  {
+    route: '/authentication/reset-password',
+    component: <ResetPassword />
+  }
 ]
 
 export default routes

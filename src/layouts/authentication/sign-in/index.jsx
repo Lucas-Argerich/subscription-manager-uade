@@ -128,7 +128,16 @@ function Basic() {
 
       navigate('/dashboard')
     } catch (err) {
-      setError(err.message)
+      switch (err.code) {
+        case 'auth/invalid-credential': {
+          setError('The email address or password is incorrect.')
+          break
+        }
+        default: {
+          setError(err.message.replace('Firebase: ', ''))
+          break
+        }
+      }    
     } finally {
       setIsSubmitted(false)
     }
@@ -174,7 +183,7 @@ function Basic() {
             <MDBox mb={2}>
               <MDInput type="email" label="Email" fullWidth onChange={(e) => setEmail(e.target.value)} />
             </MDBox>
-            <MDBox mb={2}>
+            <MDBox mb={1}>
               <MDInput type="password" label="Password" fullWidth onChange={(e) => setPassword(e.target.value)} />
             </MDBox>
             {error && (
@@ -184,6 +193,21 @@ function Basic() {
                 </MDTypography>
               </MDBox>
             )}
+            <MDBox mb={1}>
+              <MDTypography variant="button" color="text">
+                <MDTypography
+                  component={Link}
+                  to="/authentication/reset-password"
+                  variant="button"
+                  color="info"
+                  fontWeight="medium"
+                  fontSize="0.75rem"
+                  textGradient
+                >
+                  Forgot your password?
+                </MDTypography>
+              </MDTypography>
+            </MDBox>
             <MDBox display="flex" alignItems="center" ml={-1}>
               <Switch checked={rememberMe} onChange={handleSetRememberMe} />
               <MDTypography
