@@ -1,22 +1,9 @@
-/**
-=========================================================
-* Material Dashboard 2 React - v2.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
+import React, { useState } from 'react'
 // @mui material components
 import Card from '@mui/material/Card'
 import Grid from '@mui/material/Grid'
 import Icon from '@mui/material/Icon'
+import CreditCardIcon from '@mui/icons-material/CreditCard';
 import Tooltip from '@mui/material/Tooltip'
 
 // Material Dashboard 2 React components
@@ -30,10 +17,16 @@ import visaLogo from '~assets/images/logos/visa.png'
 
 // Material Dashboard 2 React context
 import { useMaterialUIController } from '~/context'
+import MDAddCard from '~/components/MDAddCard';
 
 function PaymentMethod() {
   const [controller] = useMaterialUIController()
   const { darkMode } = controller
+
+  const [open, setOpen] = useState(false)
+
+  const handleOpen = () => setOpen(true)
+  const handleClose = () => setOpen(false)
 
   return (
     <Card id="delete-account">
@@ -41,8 +34,8 @@ function PaymentMethod() {
         <MDTypography variant="h6" fontWeight="medium">
           Payment Method
         </MDTypography>
-        <MDButton variant="gradient" color="dark">
-          <Icon sx={{ fontWeight: 'bold' }}>add</Icon>
+        <MDButton variant="gradient" color="dark" onClick={handleOpen}>
+          <CreditCardIcon fontSize="Small" sx={{ fontWeight: 'bold' }} />
           &nbsp;add new card
         </MDButton>
       </MDBox>
@@ -85,7 +78,7 @@ function PaymentMethod() {
                   `${borderWidth[1]} solid ${borderColor}`,
               }}
             >
-              <MDBox component="img" src={visaLogo} alt="master card" width="10%" mr={2} />
+              <MDBox component="img" src={visaLogo} alt="visa" width="10%" mr={2} />
               <MDTypography variant="h6" fontWeight="medium">
                 ****&nbsp;&nbsp;****&nbsp;&nbsp;****&nbsp;&nbsp;5248
               </MDTypography>
@@ -100,8 +93,11 @@ function PaymentMethod() {
           </Grid>
         </Grid>
       </MDBox>
+      {/* Aquí agregamos el componente del formulario de la tarjeta */}
+      <MDAddCard open={open} onClose={handleClose} />
     </Card>
   )
 }
 
 export default PaymentMethod
+

@@ -18,6 +18,8 @@ import PropTypes from 'prop-types'
 
 // @mui material components
 import Icon from '@mui/material/Icon'
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
 // Material Dashboard 2 React components
 import MDBox from '~components/MDBox'
@@ -58,11 +60,11 @@ function Bill({ name, company, email, vat, noGutter }) {
           <MDBox display="flex" alignItems="center" mt={{ xs: 2, sm: 0 }} ml={{ xs: -1.5, sm: 0 }}>
             <MDBox mr={1}>
               <MDButton variant="text" color="error">
-                <Icon>delete</Icon>&nbsp;delete
+                <DeleteIcon fontSize='Small'/>&nbsp;delete
               </MDButton>
             </MDBox>
             <MDButton variant="text" color={darkMode ? 'white' : 'dark'}>
-              <Icon>edit</Icon>&nbsp;edit
+              <EditIcon fontSize='Small'/>&nbsp;edit
             </MDButton>
           </MDBox>
         </MDBox>

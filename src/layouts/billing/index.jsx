@@ -15,6 +15,7 @@ Coded by www.creative-tim.com
 
 // @mui material components
 import Grid from '@mui/material/Grid'
+import React, { useState } from 'react'
 
 // Material Dashboard 2 React components
 import MDBox from '~components/MDBox'
@@ -39,15 +40,9 @@ function Billing() {
       <MDBox mt={8}>
         <MDBox mb={3}>
           <Grid container spacing={3}>
-            <Grid item xs={12} lg={8}>
-            <PaymentMethod />
+            <Grid item xs={12} lg={12}>            
               <Grid container spacing={3}>
-                <Grid item xs={12} xl={6}>                
-                  <MasterCard number={4562112245947852} holder="jack peterson" expires="11/22" />
-                </Grid>
-                <Grid item xs={12} md={6} xl={3}>
-
-                </Grid>
+              <PaymentMethod />               
                 <Grid item xs={12}>                  
                 </Grid>
               </Grid>
@@ -55,8 +50,8 @@ function Billing() {
           </Grid>
         </MDBox>
         <MDBox mb={3}>
-          <Grid container spacing={3}>
-            <Grid item xs={12} md={7}>
+          <Grid container spacing={12}>
+            <Grid item xs={12} md={12}>
               <BillingInformation />
             </Grid>
           </Grid>
