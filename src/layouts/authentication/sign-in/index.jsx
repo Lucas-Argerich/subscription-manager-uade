@@ -41,6 +41,22 @@ function Basic() {
 
   const handleSetRememberMe = () => setRememberMe(!rememberMe)
 
+  const handleError = (err) => {
+    switch (err.code) {
+      case 'auth/invalid-credential': {
+        setError('The email address or password is incorrect.')
+        break
+      }
+      case 'auth/popup-closed-by-user': {
+        break
+      }
+      default: {
+        setError(err.message.replace('Firebase: ', ''))
+        break
+      }
+    }  
+  }
+
   const handleLoginWithFacebook = async (e) => {
     e.preventDefault()
 
@@ -53,7 +69,7 @@ function Basic() {
 
       navigate('/dashboard')
     } catch (err) {
-      setError(err.message)
+      handleError(err)
     } finally {
       setIsSubmitted(false)
     }
@@ -71,7 +87,7 @@ function Basic() {
 
       navigate('/dashboard')
     } catch (err) {
-      setError(err.message)
+      handleError(err)
     } finally {
       setIsSubmitted(false)
     }
@@ -89,7 +105,7 @@ function Basic() {
 
       navigate('/dashboard')
     } catch (err) {
-      setError(err.message)
+      handleError(err)
     } finally {
       setIsSubmitted(false)
     }
@@ -113,16 +129,7 @@ function Basic() {
 
       navigate('/dashboard')
     } catch (err) {
-      switch (err.code) {
-        case 'auth/invalid-credential': {
-          setError('The email address or password is incorrect.')
-          break
-        }
-        default: {
-          setError(err.message.replace('Firebase: ', ''))
-          break
-        }
-      }    
+      handleError(err)  
     } finally {
       setIsSubmitted(false)
     }
