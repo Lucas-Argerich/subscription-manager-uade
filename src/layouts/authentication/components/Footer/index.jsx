@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 // @mui material components
 import Container from '@mui/material/Container'
 import Link from '@mui/material/Link'
-import Icon from '@mui/material/Icon'
+import GitHubIcon from '@mui/icons-material/GitHub'
 
 // Material Dashboard 2 React components
 import MDBox from '~components/MDBox'
@@ -35,19 +35,10 @@ function Footer({ light }) {
             color={light ? 'white' : 'text'}
             fontSize={size.sm}
           >
-            &copy; {new Date().getFullYear()}, made with
-            <MDBox fontSize={size.md} color={light ? 'white' : 'dark'} mb={-0.5} mx={0.25}>
-              <Icon color="inherit" fontSize="inherit">
-                favorite
-              </Icon>
-            </MDBox>
-            by
-            <Link href="https://www.creative-tim.com/" target="_blank">
+            &copy; {new Date().getFullYear()},
               <MDTypography variant="button" fontWeight="medium" color={light ? 'white' : 'dark'}>
-                &nbsp;Creative Tim&nbsp;
+                &nbsp;Subtrack™&nbsp;
               </MDTypography>
-            </Link>
-            for a better web.
           </MDBox>
           <MDBox
             component="ul"
@@ -66,47 +57,15 @@ function Footer({ light }) {
               },
             })}
           >
-            <MDBox component="li" pr={2} lineHeight={1}>
-              <Link href="https://www.creative-tim.com/" target="_blank">
+            <MDBox component="li" pr={2} lineHeight={2}>
+              <Link href="https://github.com/Lucas-Argerich/subscription-manager-uade" target="_blank" display="flex" alignItems="center" gap={0.5}>
+                <GitHubIcon color="white" />
                 <MDTypography
                   variant="button"
                   fontWeight="regular"
                   color={light ? 'white' : 'dark'}
                 >
-                  Creative Tim
-                </MDTypography>
-              </Link>
-            </MDBox>
-            <MDBox component="li" px={2} lineHeight={1}>
-              <Link href="https://www.creative-tim.com/presentation" target="_blank">
-                <MDTypography
-                  variant="button"
-                  fontWeight="regular"
-                  color={light ? 'white' : 'dark'}
-                >
-                  About Us
-                </MDTypography>
-              </Link>
-            </MDBox>
-            <MDBox component="li" px={2} lineHeight={1}>
-              <Link href="https://www.creative-tim.com/blog" target="_blank">
-                <MDTypography
-                  variant="button"
-                  fontWeight="regular"
-                  color={light ? 'white' : 'dark'}
-                >
-                  Blog
-                </MDTypography>
-              </Link>
-            </MDBox>
-            <MDBox component="li" pl={2} lineHeight={1}>
-              <Link href="https://www.creative-tim.com/license" target="_blank">
-                <MDTypography
-                  variant="button"
-                  fontWeight="regular"
-                  color={light ? 'white' : 'dark'}
-                >
-                  License
+                  Github
                 </MDTypography>
               </Link>
             </MDBox>
