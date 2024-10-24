@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import Card from '@mui/material/Card'
 import Grid from '@mui/material/Grid'
 import Icon from '@mui/material/Icon'
-import CreditCardIcon from '@mui/icons-material/CreditCard';
+import CreditCardIcon from '@mui/icons-material/CreditCard'
 import Tooltip from '@mui/material/Tooltip'
 
 // Material Dashboard 2 React components
@@ -17,7 +17,7 @@ import visaLogo from '~assets/images/logos/visa.png'
 
 // Material Dashboard 2 React context
 import { useMaterialUIController } from '~/context'
-import MDAddCard from '~/components/MDAddCard';
+import MDAddCard from '~/components/MDAddCard'
 
 function PaymentMethod() {
   const [controller] = useMaterialUIController()
@@ -100,4 +100,3 @@ function PaymentMethod() {
 }
 
 export default PaymentMethod
-

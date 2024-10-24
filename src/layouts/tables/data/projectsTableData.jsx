@@ -32,7 +32,6 @@ import logoSpotify from '~assets/images/small-logos/logo-spotify.svg'
 import logoInvesion from '~assets/images/small-logos/logo-invision.svg'
 import MDOptions from '~/components/MDOptions'
 
-
 export default function data() {
 
   const handleEdit = () => {
@@ -44,7 +43,6 @@ export default function data() {
     window.confirm('¿Esta seguro que desa eliminar la suscripcion?')    
     //service.eliminarSuscripcion
   }
-
 
   const Project = ({ image, name }) => (
     <MDBox display="flex" alignItems="center" lineHeight={1}>

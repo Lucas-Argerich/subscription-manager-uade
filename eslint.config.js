@@ -24,7 +24,8 @@ export default tseslint.config(
         { allowConstantExport: true },
       ],
       'semi': ['error', 'never'],
-      'quotes': ['warn', 'single']
+      'quotes': ['warn', 'single'],
+      'no-multiple-empty-lines': ['error', { max: 1, maxEOF: 0, maxBOF: 0 }]
     },
   },
 )
