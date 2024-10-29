@@ -17,7 +17,7 @@ function Footer({ light }) {
   const { size } = typography
 
   return (
-    <MDBox position="absolute" width="100%" bottom={0} py={4}>
+    <MDBox position="absolute" width="100%" left={0} right={0} bottom={0} py={4}>
       <Container>
         <MDBox
           width="100%"
@@ -59,7 +59,7 @@ function Footer({ light }) {
           >
             <MDBox component="li" pr={2} lineHeight={2}>
               <Link href="https://github.com/Lucas-Argerich/subscription-manager-uade" target="_blank" display="flex" alignItems="center" gap={0.5}>
-                <GitHubIcon color="white" />
+                <GitHubIcon color={light ? 'white' : 'dark'} />
                 <MDTypography
                   variant="button"
                   fontWeight="regular"

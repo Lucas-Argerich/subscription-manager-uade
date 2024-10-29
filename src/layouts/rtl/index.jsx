@@ -10,7 +10,7 @@ import MDBox from '~components/MDBox'
 import ComplexStatisticsCard from '~examples/Cards/StatisticsCards/ComplexStatisticsCard'
 import ReportsBarChart from '~examples/Charts/BarCharts/ReportsBarChart'
 import ReportsLineChart from '~examples/Charts/LineCharts/ReportsLineChart'
-import Footer from '~examples/Footer'
+import Footer from '~layouts/authentication/components/Footer'
 import DashboardLayout from '~examples/LayoutContainers/DashboardLayout'
 import DashboardNavbar from '~examples/Navbars/DashboardNavbar'
 
