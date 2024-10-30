@@ -1,7 +1,6 @@
 import Dashboard from '~layouts/dashboard'
 import Tables from '~layouts/tables'
 import Billing from '~layouts/billing'
-import RTL from '~layouts/rtl'
 import SignIn from '~layouts/authentication/sign-in'
 import SignUp from '~layouts/authentication/sign-up'
 import ResetPassword from '~/layouts/authentication/reset-password'
@@ -10,7 +9,6 @@ import ResetPassword from '~/layouts/authentication/reset-password'
 import DashboardIcon from '@mui/icons-material/Dashboard'
 import TableViewIcon from '@mui/icons-material/TableView'
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong'
-import AssignmentIndIcon from '@mui/icons-material/AssignmentInd'
 import LoginIcon from '@mui/icons-material/Login'
 import LogoutIcon from '@mui/icons-material/Logout'
 
@@ -38,14 +36,6 @@ const routes = [
     icon: <ReceiptLongIcon fontSize="small" />,
     route: '/billing',
     component: <Billing />,
-  },
-  {
-    type: 'collapse',
-    name: 'Credenciales',
-    key: 'rtl',
-    icon: <AssignmentIndIcon fontSize="small"/>,
-    route: '/rtl',
-    component: <RTL />,
   },
   {
     type: 'collapse',
