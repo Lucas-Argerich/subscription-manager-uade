@@ -12,12 +12,79 @@ import DashboardLayout from '~examples/LayoutContainers/DashboardLayout'
 import DashboardNavbar from '~examples/Navbars/DashboardNavbar'
 import Footer from '~layouts/authentication/components/Footer'
 import DataTable from '~examples/Tables/DataTable'
-
-// Data
-import projectsTableData from '~layouts/tables/data/projectsTableData'
+import useServices from '~/hooks/useServices'
+import Project from './components/Project'
+import HiddenPassword from './components/HiddenPassword'
+import MDOptions from '~/components/MDOptions'
+import Progress from './components/Progress'
 
 function Tables() {
-  const { columns: pColumns, rows: pRows } = projectsTableData()
+  const services = useServices()
+
+  const handleEdit = () => {}
+
+  const handleDelete = () => {}
+
+  const columns = [
+    { Header: 'Servicio', accessor: 'service', width: '30%', align: 'left' },
+    { Header: 'Costo', accessor: 'cost', align: 'left' },
+    { Header: 'Costo Acumulado', accessor: 'accumulated', align: 'left' },
+    { Header: 'Plan', accessor: 'plan', align: 'center' },
+    { Header: 'Cuenta', accessor: 'account', align: 'center' },
+    { Header: 'Contraseña', accessor: 'password', align: 'center' },
+    { Header: 'Seguridad credenciales', accessor: 'security', align: 'center' },
+    { Header: 'Acción', accessor: 'action', align: 'center' }
+  ]
+
+  const rows =
+    services?.map((service, i) => {
+      const latestSubscription = service.subscriptions?.sort(
+        (a, b) => a.payedAt.seconds - b.payedAt.seconds
+      )[0]
+
+      return {
+        key: i,
+        service: (
+          <Project
+            image={`https://cdn.brandfetch.io/${
+              service.domain ?? service.serviceName.replace(' ', '') + '.com'
+            }/w/400/h/400/fallback/lettermark`}
+            name={service.serviceName}
+          />
+        ),
+        cost: (
+          <MDTypography component="p" variant="button" color="text" fontWeight="medium">
+            {latestSubscription?.plan === 'free' ? 'Gratis' : `$${latestSubscription?.price}`}
+          </MDTypography>
+        ),
+        accumulated: (
+          <MDTypography component="p" variant="button" color="text" fontWeight="medium">
+            $
+            {service.subscriptions?.reduce(
+              (count, val) => count + (Number.isNaN(parseInt(val.price)) ? 0 : parseInt(val.price)),
+              0
+            )}
+          </MDTypography>
+        ),
+        plan: (
+          <MDTypography component="p" variant="caption" color="text" fontWeight="medium">
+            {latestSubscription?.plan}
+          </MDTypography>
+        ),
+        account: (
+          <MDTypography component="p" variant="caption" color="text" fontWeight="medium">
+            {service.username}
+          </MDTypography>
+        ),
+        password: <HiddenPassword password={service.passwordEncrypted} />,
+        security: <Progress color="info" value={60} />,
+        action: (
+          <MDTypography component="a" href="#" color="text">
+            <MDOptions onEdit={handleEdit} onDelete={handleDelete} />
+          </MDTypography>
+        )
+      }
+    }) ?? []
 
   return (
     <DashboardLayout>
@@ -43,7 +110,7 @@ function Tables() {
               </MDBox>
               <MDBox pt={3}>
                 <DataTable
-                  table={{ columns: pColumns, rows: pRows }}
+                  table={{ columns, rows }}
                   isSorted={false}
                   entriesPerPage={false}
                   showTotalEntries={false}
