@@ -9,11 +9,12 @@ export interface UserDocument extends DocumentData {
 
 export interface ServiceDocument extends DocumentData {
   serviceName: string
+  domain: string
   username: string
   passwordEncrypted: string
   lastUsed: Timestamp
-  subscriptions: SubscriptionDocument[]
-  logins: LoginDocument[]
+  subscriptions?: SubscriptionDocument[]
+  logins?: LoginDocument[]
 }
 
 export interface SubscriptionDocument extends DocumentData {

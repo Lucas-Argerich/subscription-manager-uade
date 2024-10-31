@@ -24,6 +24,7 @@ const SubForm = () => {
   const [open, setOpen] = useState(false)
   const [formData, setFormData] = useState({
     service: '',
+    domain: '',
     plan: 'free',
     expiration: '',
     fee: '',
@@ -60,6 +61,7 @@ const SubForm = () => {
     if (
       !user ||
       !formData.service ||
+      !formData.domain ||
       !formData.plan ||
       !formData.expiration ||
       (!formData.fee && formData.plan !== 'free') ||
@@ -74,6 +76,7 @@ const SubForm = () => {
     try {
       const docRef = await addDoc(collection(db, 'users', user.uid, 'services'), {
         serviceName: formData.service,
+        domain: formData.domain.trim().replace('https://', '').split('/')[0],
         username: formData.email,
         passwordEncrypted: formData.password, //to do
       })
@@ -82,7 +85,7 @@ const SubForm = () => {
         plan: formData.plan,
         price: formData.fee,
         cycle: formData.cycle,
-        paymentLimit: formData.expiration
+        payedAt: formData.expiration
       })      
 
       handleClose()
@@ -130,6 +133,15 @@ const SubForm = () => {
               label="Service/Platform"
               name="service"
               value={formData.service}
+              onChange={handleChange}
+              fullWidth
+              margin="normal"
+              required
+            />
+            <TextField
+              label="Domain (ex. subtrack.com)"
+              name="domain"
+              value={formData.domain}
               onChange={handleChange}
               fullWidth
               margin="normal"
