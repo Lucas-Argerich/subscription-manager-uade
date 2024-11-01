@@ -19,11 +19,12 @@ function DashboardLayout({ children }) {
 
   useEffect(() => {
     setLayout(dispatch, 'dashboard')
-  }, [pathname])
+  }, [pathname, dispatch])
 
   return (
     <MDBox
       sx={({ breakpoints, transitions, functions: { pxToRem } }) => ({
+        minHeight: '100svh',
         p: 3,
         pb: 8,
         position: 'relative',

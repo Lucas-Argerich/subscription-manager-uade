@@ -17,6 +17,7 @@ import Project from './components/Project'
 import HiddenPassword from './components/HiddenPassword'
 import MDOptions from '~/components/MDOptions'
 import Progress from './components/Progress'
+import { lowerCapitalize } from '~/utils'
 
 function Tables() {
   const services = useServices()
@@ -49,7 +50,7 @@ function Tables() {
             image={`https://cdn.brandfetch.io/${
               service.domain ?? service.serviceName.replace(' ', '') + '.com'
             }/w/400/h/400/fallback/lettermark`}
-            name={service.serviceName}
+            name={lowerCapitalize(service.serviceName)}
           />
         ),
         cost: (
