@@ -31,7 +31,7 @@ import {
 
 // Define the types for route objects
 
-function Sidenav({ color = 'info', brand = '', brandName, routes, ...rest }) {
+function Sidenav({ brand = '', brandName, routes, ...rest }) {
   const [controller, dispatch] = useMaterialUIController()
   const { miniSidenav, transparentSidenav, whiteSidenav, darkMode, sidenavColor } = controller
   const location = useLocation()
@@ -136,13 +136,13 @@ function Sidenav({ color = 'info', brand = '', brandName, routes, ...rest }) {
             <Icon sx={{ fontWeight: 'bold' }}>close</Icon>
           </MDTypography>
         </MDBox>
-        <MDBox component={NavLink} to="/" display="flex" alignItems="center">
+        <MDBox component={NavLink} to="/" display="flex" gap="6px" lineHeight="12px">
           {brand && <MDBox component="img" src={brand} alt="Brand" width="2rem" />}
           <MDBox
             width={!brandName ? '100%' : undefined}
             sx={(theme) => sidenavLogoLabel(theme, { miniSidenav })}
           >
-            <MDTypography component="h6" variant="button" fontWeight="medium" color={textColor}>
+            <MDTypography component="h6" variant="h4" color={textColor}>
               {brandName}
             </MDTypography>
           </MDBox>
