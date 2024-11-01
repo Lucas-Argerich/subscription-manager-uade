@@ -20,12 +20,64 @@ import reportsLineChartData from '~layouts/dashboard/data/reportsLineChartData'
 import Projects from '~layouts/dashboard/components/Projects'
 import OrdersOverview from '~layouts/dashboard/components/OrdersOverview'
 
-import WeekendIcon  from '@mui/icons-material/Weekend'
+import WeekendIcon from '@mui/icons-material/Weekend'
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney'
 import StoreIcon from '@mui/icons-material/Store'
+import useServices from '~/hooks/useServices'
 
 function Dashboard() {
+  const services = useServices()
+  console.log(services)
   const { sales, tasks } = reportsLineChartData
+
+  const now = new Date()
+
+  const thisYearServices = services?.filter((service) =>
+    service.subscriptions?.some((sub) => new Date(sub.payedAt).getFullYear() === now.getFullYear())
+  )
+
+  const lastYearServices = services?.filter((service) =>
+    service.subscriptions?.some(
+      (sub) => new Date(sub.payedAt).getFullYear() === now.getFullYear() - 1
+    )
+  )
+
+  console.log(thisYearServices, lastYearServices)
+
+  const thisMonthServices = services?.filter((service) =>
+    service.subscriptions?.some((sub) => {
+      console.log(new Date(sub.payedAt).getFullYear(), new Date(sub.payedAt).getMonth())
+      return (
+        new Date(sub.payedAt).getFullYear() === now.getFullYear() &&
+        new Date(sub.payedAt).getMonth() === now.getMonth()
+      )
+    })
+  )
+
+  const lastMonthServices = services?.filter((service) =>
+    service.subscriptions?.some(
+      (sub) =>
+        new Date(sub.payedAt).getFullYear() === now.getFullYear() &&
+        new Date(sub.payedAt).getMonth() === now.getMonth() - 1
+    )
+  )
+
+  const thisMonthTotalSum = thisMonthServices?.reduce((sum, service) => {
+    console.log('p:', parseInt(service.subscriptions[0]?.price))
+    return sum + parseInt(service.subscriptions[0]?.price)
+  }, 0)
+  console.log(thisMonthTotalSum)
+
+  const lastMonthTotalSum = lastMonthServices?.reduce(
+    (sum, service) =>
+      sum +
+      (service.subscriptions?.find(
+        (sub) =>
+          new Date(sub.payedAt).getFullYear() === now.getFullYear() &&
+          new Date(sub.payedAt).getMonth() === now.getMonth() - 1
+      )?.price ?? 0),
+    0
+  )
 
   return (
     <DashboardLayout>
@@ -36,12 +88,12 @@ function Dashboard() {
             <MDBox mb={1.5}>
               <ComplexStatisticsCard
                 color="dark"
-                icon={<WeekendIcon fontSize="small"/>}
+                icon={<WeekendIcon fontSize="small" />}
                 title="Suscripciones"
-                count={10}
+                count={services?.length}
                 percentage={{
                   color: 'success',
-                  amount: '+20',
+                  amount: '+' + (thisYearServices?.length - lastYearServices?.length),
                   label: 'desde el año pasado'
                 }}
               />
@@ -49,15 +101,17 @@ function Dashboard() {
           </Grid>
           <Grid item xs={12} md={6} lg={3}>
             <MDBox mb={1.5}>
-              <ComplexStatisticsCard                
-                icon={<AttachMoneyIcon fontSize="small"/>}
+              <ComplexStatisticsCard
+                icon={<AttachMoneyIcon fontSize="small" />}
                 title="Costo Mensual"
-                count="$16000"
-                percentage={{
-                  color: 'error',
-                  amount: '+15%',
-                  label: 'desde este año'
-                }}
+                count={'$' + thisMonthTotalSum}
+                percentage={((
+                  val = ((thisMonthTotalSum - lastMonthTotalSum) / lastMonthTotalSum) * 100
+                ) => ({
+                  amount: (val > 0 ? '+' : '') + Math.floor(val) + '%',
+                  color: val > 0 ? 'error' : 'success',
+                  label: 'desde el mes pasado'
+                }))()}
               />
             </MDBox>
           </Grid>
@@ -65,7 +119,7 @@ function Dashboard() {
             <MDBox mb={1.5}>
               <ComplexStatisticsCard
                 color="success"
-                icon={<StoreIcon fontSize="small"/>}
+                icon={<StoreIcon fontSize="small" />}
                 title="Algo"
                 count="34k"
                 percentage={{
@@ -80,12 +134,13 @@ function Dashboard() {
             <MDBox mb={1.5}>
               <ComplexStatisticsCard
                 color="primary"
-                icon={<StoreIcon fontSize="small"/>}
+                icon={<StoreIcon fontSize="small" />}
                 title="Algo mas"
                 count="+91"
                 percentage={{
                   color: 'success',
                   amount: '',
+
                   label: 'Just updated'
                 }}
               />
@@ -98,9 +153,9 @@ function Dashboard() {
               <MDBox mb={3}>
                 <ReportsBarChart
                   color="info"
-                  title="App mas utilizadas por mes"
+                  title="App mas utilizadas"
                   description="Frecuencia de uso"
-                  date="Principio de año"
+                  date="Semanal"
                   chart={reportsBarChartData}
                 />
               </MDBox>
