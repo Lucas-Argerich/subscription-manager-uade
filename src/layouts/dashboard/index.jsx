@@ -42,16 +42,12 @@ function Dashboard() {
     )
   )
 
-  console.log(thisYearServices, lastYearServices)
-
   const thisMonthServices = services?.filter((service) =>
-    service.subscriptions?.some((sub) => {
-      console.log(new Date(sub.payedAt).getFullYear(), new Date(sub.payedAt).getMonth())
-      return (
+    service.subscriptions?.some(
+      (sub) =>
         new Date(sub.payedAt).getFullYear() === now.getFullYear() &&
         new Date(sub.payedAt).getMonth() === now.getMonth()
-      )
-    })
+    )
   )
 
   const lastMonthServices = services?.filter((service) =>
@@ -62,11 +58,10 @@ function Dashboard() {
     )
   )
 
-  const thisMonthTotalSum = thisMonthServices?.reduce((sum, service) => {
-    console.log('p:', parseInt(service.subscriptions[0]?.price))
-    return sum + parseInt(service.subscriptions[0]?.price)
-  }, 0)
-  console.log(thisMonthTotalSum)
+  const thisMonthTotalSum = thisMonthServices?.reduce(
+    (sum, service) => sum + parseInt(service.subscriptions[0]?.price),
+    0
+  )
 
   const lastMonthTotalSum = lastMonthServices?.reduce(
     (sum, service) =>
