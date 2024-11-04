@@ -14,10 +14,49 @@ import MDTypography from '~components/MDTypography'
 import DataTable from '~examples/Tables/DataTable'
 
 // Data
-import data from '~layouts/dashboard/components/Projects/data'
+import useServices from '~/hooks/useServices'
+import Project from '~/layouts/tables/components/Project'
+import { lowerCapitalize } from '~/utils'
+import Progress from '~/layouts/tables/components/Progress'
 
-function Projects() {
-  const { columns, rows } = data()
+function Subscriptions() {
+  const services = useServices()
+
+  const columns = [
+    { Header: 'Servicio', accessor: 'companies', width: '45%', align: 'left' },
+    { Header: 'Plan', accessor: 'plan', width: '10%', align: 'left' },
+    { Header: 'Costo', accessor: 'cost', align: 'center' },
+    { Header: 'Seguridad credenciales', accessor: 'security', align: 'center' }
+  ]
+  const rows =
+    services.slice(0, 6)?.map((service, i) => {
+      const latestSubscription = service.subscriptions?.sort(
+        (a, b) => a.payedAt.seconds - b.payedAt.seconds
+      )[0]
+
+      return {
+        key: i,
+        companies: (
+          <Project
+            image={`https://cdn.brandfetch.io/${
+              service.domain ?? service.serviceName.replace(' ', '') + '.com'
+            }/w/400/h/400/fallback/lettermark`}
+            name={lowerCapitalize(service.serviceName)}
+          />
+        ),
+        plan: (
+          <MDTypography component="p" variant="caption" color="text" fontWeight="medium">
+            {latestSubscription?.plan}
+          </MDTypography>
+        ),
+        cost: (
+          <MDTypography variant="caption" color="text" fontWeight="medium">
+            ${latestSubscription?.price}
+          </MDTypography>
+        ),
+        security: <Progress color="info" value={60} />
+      }
+    }) ?? []
   const [menu, setMenu] = useState(null)
 
   const openMenu = ({ currentTarget }) => setMenu(currentTarget)
@@ -29,11 +68,11 @@ function Projects() {
       anchorEl={menu}
       anchorOrigin={{
         vertical: 'top',
-        horizontal: 'left',
+        horizontal: 'left'
       }}
       transformOrigin={{
         vertical: 'top',
-        horizontal: 'right',
+        horizontal: 'right'
       }}
       open={Boolean(menu)}
       onClose={closeMenu}
@@ -56,13 +95,13 @@ function Projects() {
               sx={{
                 fontWeight: 'bold',
                 color: ({ palette: { info } }) => info.main,
-                mt: -0.5,
+                mt: -0.5
               }}
             >
               done
             </Icon>
             <MDTypography variant="button" fontWeight="regular" color="text">
-              &nbsp;<strong>30</strong> Actualmente
+              &nbsp;<strong>{services.length}</strong> Actualmente
             </MDTypography>
           </MDBox>
         </MDBox>
@@ -86,4 +125,4 @@ function Projects() {
   )
 }
 
-export default Projects
+export default Subscriptions
