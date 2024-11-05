@@ -40,7 +40,7 @@ function Tables() {
   const rows =
     services?.map((service, i) => {
       const latestSubscription = service.subscriptions?.sort(
-        (a, b) => a.payedAt.seconds - b.payedAt.seconds
+        (a, b) => new Date(a.expiresAt).getTime() - new Date(b.expiresAt).getTime()
       )[0]
 
       return {

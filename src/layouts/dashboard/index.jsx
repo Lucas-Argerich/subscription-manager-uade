@@ -18,7 +18,7 @@ import reportsLineChartData from '~layouts/dashboard/data/reportsLineChartData'
 
 // Dashboard components
 import Subscriptions from '~/layouts/dashboard/components/Subscriptions'
-import OrdersOverview from '~layouts/dashboard/components/OrdersOverview'
+// import Expirations from '~/layouts/dashboard/components/Expirations'
 
 import WeekendIcon from '@mui/icons-material/Weekend'
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney'
@@ -27,34 +27,33 @@ import useServices from '~/hooks/useServices'
 
 function Dashboard() {
   const services = useServices()
-  console.log(services)
   const { sales, tasks } = reportsLineChartData
 
   const now = new Date()
 
   const thisYearServices = services?.filter((service) =>
-    service.subscriptions?.some((sub) => new Date(sub.payedAt).getFullYear() === now.getFullYear())
+    service.subscriptions?.some((sub) => new Date(sub.expiresAt).getFullYear() === now.getFullYear())
   )
 
   const lastYearServices = services?.filter((service) =>
     service.subscriptions?.some(
-      (sub) => new Date(sub.payedAt).getFullYear() === now.getFullYear() - 1
+      (sub) => new Date(sub.expiresAt).getFullYear() === now.getFullYear() - 1
     )
   )
 
   const thisMonthServices = services?.filter((service) =>
     service.subscriptions?.some(
       (sub) =>
-        new Date(sub.payedAt).getFullYear() === now.getFullYear() &&
-        new Date(sub.payedAt).getMonth() === now.getMonth()
+        new Date(sub.expiresAt).getFullYear() === now.getFullYear() &&
+        new Date(sub.expiresAt).getMonth() === now.getMonth()
     )
   )
 
   const lastMonthServices = services?.filter((service) =>
     service.subscriptions?.some(
       (sub) =>
-        new Date(sub.payedAt).getFullYear() === now.getFullYear() &&
-        new Date(sub.payedAt).getMonth() === now.getMonth() - 1
+        new Date(sub.expiresAt).getFullYear() === now.getFullYear() &&
+        new Date(sub.expiresAt).getMonth() === now.getMonth() - 1
     )
   )
 
@@ -68,8 +67,8 @@ function Dashboard() {
       sum +
       (service.subscriptions?.find(
         (sub) =>
-          new Date(sub.payedAt).getFullYear() === now.getFullYear() &&
-          new Date(sub.payedAt).getMonth() === now.getMonth() - 1
+          new Date(sub.expiresAt).getFullYear() === now.getFullYear() &&
+          new Date(sub.expiresAt).getMonth() === now.getMonth() - 1
       )?.price ?? 0),
     0
   )
@@ -189,7 +188,7 @@ function Dashboard() {
               <Subscriptions />
             </Grid>
             <Grid item xs={12} md={6} lg={4}>
-              <OrdersOverview />
+              {/* <Expirations /> */}
             </Grid>
           </Grid>
         </MDBox>

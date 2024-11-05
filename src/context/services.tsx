@@ -51,7 +51,7 @@ const ServiceProvider = ({ children }: { children: React.ReactNode }) => {
         const updatedSubscriptions = subSnapshots.docs.map((sub) => ({
           id: sub.id,
           ...(sub.data() as SubscriptionDocument)
-        })).sort((a, b) => a.payedAt.seconds - b.payedAt.seconds)
+        })).sort((a, b) => new Date(a.expiresAt).getTime() - new Date(b.expiresAt).getTime())
 
         setServices(
           (prev) =>
@@ -68,7 +68,7 @@ const ServiceProvider = ({ children }: { children: React.ReactNode }) => {
         const updatedLogins = logSnapshots.docs.map((log) => ({
           id: log.id,
           ...(log.data() as LoginDocument)
-        })).sort((a, b) => a.timestamp.seconds - b.timestamp.seconds)
+        })).sort((a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime())
 
         setServices(
           (prev) =>

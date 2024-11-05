@@ -29,9 +29,9 @@ function Subscriptions() {
     { Header: 'Seguridad credenciales', accessor: 'security', align: 'center' }
   ]
   const rows =
-    services.slice(0, 6)?.map((service, i) => {
+    services?.slice(0, 6).map((service, i) => {
       const latestSubscription = service.subscriptions?.sort(
-        (a, b) => a.payedAt.seconds - b.payedAt.seconds
+        (a, b) => a.expiresAt.seconds - b.expiresAt.seconds
       )[0]
 
       return {
@@ -101,7 +101,7 @@ function Subscriptions() {
               done
             </Icon>
             <MDTypography variant="button" fontWeight="regular" color="text">
-              &nbsp;<strong>{services.length}</strong> Actualmente
+              &nbsp;<strong>{services?.length}</strong> Actualmente
             </MDTypography>
           </MDBox>
         </MDBox>

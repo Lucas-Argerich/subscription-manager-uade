@@ -85,7 +85,7 @@ const SubForm = () => {
         plan: formData.plan,
         price: formData.fee,
         cycle: formData.cycle,
-        payedAt: formData.expiration
+        expiresAt: formData.expiration
       })      
 
       handleClose()
