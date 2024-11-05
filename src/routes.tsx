@@ -11,15 +11,16 @@ import TableViewIcon from '@mui/icons-material/TableView'
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong'
 import LoginIcon from '@mui/icons-material/Login'
 import LogoutIcon from '@mui/icons-material/Logout'
+import SignOut from './layouts/authentication/sign-out'
 
 const routes = [
   {
     type: 'collapse',
     name: 'Home',
     key: 'dashboard',
-    icon: <DashboardIcon  fontSize="small"/>,
+    icon: <DashboardIcon fontSize="small" />,
     route: '/dashboard',
-    component: <Dashboard />,
+    component: <Dashboard />
   },
   {
     type: 'collapse',
@@ -27,7 +28,7 @@ const routes = [
     key: 'tables',
     icon: <TableViewIcon fontSize="small" />,
     route: '/tables',
-    component: <Tables />,
+    component: <Tables />
   },
   {
     type: 'collapse',
@@ -35,7 +36,7 @@ const routes = [
     key: 'billing',
     icon: <ReceiptLongIcon fontSize="small" />,
     route: '/billing',
-    component: <Billing />,
+    component: <Billing />
   },
   {
     type: 'collapse',
@@ -43,7 +44,7 @@ const routes = [
     key: 'sign-in',
     icon: <LoginIcon fontSize="small" />,
     route: '/authentication/sign-in',
-    component: <SignIn />,
+    component: <SignIn />
   },
   {
     type: 'collapse',
@@ -51,7 +52,14 @@ const routes = [
     key: 'sign-up',
     icon: <LogoutIcon fontSize="small" />,
     route: '/authentication/sign-up',
-    component: <SignUp />,
+    component: <SignUp />
+  },
+  {
+    type: 'collapse',
+    name: 'Sign Out',
+    icon: <LogoutIcon fontSize="small" />,
+    route: '/authentication/sign-out',
+    component: <SignOut />
   },
   {
     route: '/authentication/reset-password',

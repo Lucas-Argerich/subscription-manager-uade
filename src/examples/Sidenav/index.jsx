@@ -28,10 +28,12 @@ import {
   setTransparentSidenav,
   setWhiteSidenav
 } from '~/context'
+import useUser from '~/hooks/useUser'
 
 // Define the types for route objects
 
 function Sidenav({ brand = '', brandName, routes, ...rest }) {
+  const user = useUser()
   const [controller, dispatch] = useMaterialUIController()
   const { miniSidenav, transparentSidenav, whiteSidenav, darkMode, sidenavColor } = controller
   const location = useLocation()
@@ -62,6 +64,9 @@ function Sidenav({ brand = '', brandName, routes, ...rest }) {
 
   const renderRoutes = routes.map(({ type, name, icon, title, noCollapse, key, href, route }) => {
     let returnValue
+
+    if (user && (key === 'sign-in' || key === 'sign-up')) return
+    if (!user && key === 'sign-out') return
 
     if (type === 'collapse') {
       returnValue = href ? (
@@ -115,6 +120,8 @@ function Sidenav({ brand = '', brandName, routes, ...rest }) {
 
     return returnValue
   })
+
+  if (!user) return
 
   return (
     <SidenavRoot
