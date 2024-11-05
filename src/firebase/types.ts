@@ -1,9 +1,9 @@
-import { DocumentData, Timestamp } from 'firebase/firestore'
+import { DocumentData } from 'firebase/firestore'
 
 export interface UserDocument extends DocumentData {
   email: string
   displayName: string
-  createdAt: Timestamp
+  createdAt: Date
   services: ServiceDocument[]
 }
 
@@ -12,7 +12,7 @@ export interface ServiceDocument extends DocumentData {
   domain: string
   username: string
   passwordEncrypted: string
-  lastUsed: Timestamp
+  lastUsed: Date
   subscriptions?: SubscriptionDocument[]
   logins?: LoginDocument[]
 }
@@ -21,10 +21,11 @@ export interface SubscriptionDocument extends DocumentData {
   plan: string
   price: string
   cycle: string
-  payedAt: Timestamp
+  expiresAt: Date
+  isPayed: boolean
 }
 
 export interface LoginDocument extends DocumentData {
   ipAddress: string
-  timestamp: Timestamp
+  timestamp: Date
 }
