@@ -83,6 +83,32 @@ function Dashboard() {
     0
   )
 
+  const thisYearTotalSum = thisYearServices?.reduce(
+    (sum, service) =>
+      sum +
+      service.subscriptions
+        ?.filter((sub) => new Date(sub.expiresAt).getFullYear() === now.getFullYear())
+        .reduce(
+          (sum2, sub) =>
+            sum2 + ((price = parseInt(sub.price)) => (Number.isNaN(price) ? 0 : price))(),
+          0
+        ),
+    0
+  )
+
+  const lastYearTotalSum = lastYearServices?.reduce(
+    (sum, service) =>
+      sum +
+      service.subscriptions
+        ?.filter((sub) => new Date(sub.expiresAt).getFullYear() === now.getFullYear() - 1)
+        .reduce(
+          (sum2, sub) =>
+            sum2 + ((price = parseInt(sub.price)) => (Number.isNaN(price) ? 0 : price))(),
+          0
+        ),
+    0
+  )
+
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -110,7 +136,8 @@ function Dashboard() {
                 title="Costo Mensual"
                 count={'$' + thisMonthTotalSum}
                 percentage={((
-                  val = ((thisMonthTotalSum - lastMonthTotalSum) / lastMonthTotalSum) * 100
+                  val = ((thisMonthTotalSum - lastMonthTotalSum) / Math.max(lastMonthTotalSum, 1)) *
+                    100
                 ) => ({
                   amount: (val > 0 ? '+' : '') + Math.floor(val) + '%',
                   color: val > 0 ? 'error' : 'success',
@@ -124,17 +151,20 @@ function Dashboard() {
               <ComplexStatisticsCard
                 color="success"
                 icon={<StoreIcon fontSize="small" />}
-                title="Algo"
-                count="34k"
-                percentage={{
-                  color: 'success',
-                  amount: '+1%',
-                  label: 'than yesterday'
-                }}
+                title="Costos del Año"
+                count={'$' + thisYearTotalSum}
+                percentage={((
+                  val = ((thisYearTotalSum - lastYearTotalSum) / Math.max(lastYearTotalSum, 1)) *
+                    100
+                ) => ({
+                  amount: (val > 0 ? '+' : '') + Math.floor(val) + '%',
+                  color: val > 0 ? 'error' : 'success',
+                  label: 'desde el año pasado'
+                }))()}
               />
             </MDBox>
           </Grid>
-          <Grid item xs={12} md={6} lg={3}>
+          {/* <Grid item xs={12} md={6} lg={3}>
             <MDBox mb={1.5}>
               <ComplexStatisticsCard
                 color="primary"
@@ -149,7 +179,7 @@ function Dashboard() {
                 }}
               />
             </MDBox>
-          </Grid>
+          </Grid> */}
         </Grid>
         <MDBox mt={4.5}>
           <Grid container spacing={3}>
