@@ -67,7 +67,7 @@ export const subscriptionRenewalQueue = onTaskDispatched(
 
       const newSubscriptionData /* : SubscriptionDocument */ = {
         ...latest,
-        expiresAt: newDate
+        expiresAt: newDate.toLocaleDateString('en-CA')
       }
 
       await getFirestore()
