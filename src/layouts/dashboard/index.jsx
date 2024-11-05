@@ -18,7 +18,7 @@ import reportsLineChartData from '~layouts/dashboard/data/reportsLineChartData'
 
 // Dashboard components
 import Subscriptions from '~/layouts/dashboard/components/Subscriptions'
-// import Expirations from '~/layouts/dashboard/components/Expirations'
+import Expirations from '~/layouts/dashboard/components/Expirations'
 
 import WeekendIcon from '@mui/icons-material/Weekend'
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney'
@@ -188,7 +188,7 @@ function Dashboard() {
               <Subscriptions />
             </Grid>
             <Grid item xs={12} md={6} lg={4}>
-              {/* <Expirations /> */}
+              <Expirations />
             </Grid>
           </Grid>
         </MDBox>
