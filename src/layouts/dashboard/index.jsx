@@ -31,8 +31,12 @@ function Dashboard() {
 
   const now = new Date()
 
+  console.log(services)
+
   const thisYearServices = services?.filter((service) =>
-    service.subscriptions?.some((sub) => new Date(sub.expiresAt).getFullYear() === now.getFullYear())
+    service.subscriptions?.some(
+      (sub) => new Date(sub.expiresAt).getFullYear() === now.getFullYear()
+    )
   )
 
   const lastYearServices = services?.filter((service) =>
@@ -58,18 +62,24 @@ function Dashboard() {
   )
 
   const thisMonthTotalSum = thisMonthServices?.reduce(
-    (sum, service) => sum + parseInt(service.subscriptions[0]?.price),
+    (sum, service) =>
+      sum +
+      ((price = parseInt(service.subscriptions[0]?.price)) => (Number.isNaN(price) ? 0 : price))(),
     0
   )
 
   const lastMonthTotalSum = lastMonthServices?.reduce(
     (sum, service) =>
       sum +
-      (service.subscriptions?.find(
-        (sub) =>
-          new Date(sub.expiresAt).getFullYear() === now.getFullYear() &&
-          new Date(sub.expiresAt).getMonth() === now.getMonth() - 1
-      )?.price ?? 0),
+      ((
+        price = parseInt(
+          service.subscriptions?.find(
+            (sub) =>
+              new Date(sub.expiresAt).getFullYear() === now.getFullYear() &&
+              new Date(sub.expiresAt).getMonth() === now.getMonth() - 1
+          )?.price
+        )
+      ) => (Number.isNaN(price) ? 0 : price))(),
     0
   )
 

@@ -50,8 +50,8 @@ function Subscriptions() {
           </MDTypography>
         ),
         cost: (
-          <MDTypography variant="caption" color="text" fontWeight="medium">
-            ${latestSubscription?.price}
+          <MDTypography component="p" variant="button" color="text" fontWeight="medium">
+            {latestSubscription?.plan === 'free' ? 'Gratis' : `$${latestSubscription?.price}`}
           </MDTypography>
         ),
         security: <Progress color="info" value={60} />
