@@ -8,14 +8,14 @@ import { ServiceProvider } from './context/services'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <ServiceProvider>
-      <BrowserRouter>
-        <FirebaseAuthProvider>
+    <BrowserRouter>
+      <FirebaseAuthProvider>
+        <ServiceProvider>
           <MaterialUIControllerProvider>
             <App />
           </MaterialUIControllerProvider>
-        </FirebaseAuthProvider>
-      </BrowserRouter>
-    </ServiceProvider>
+        </ServiceProvider>
+      </FirebaseAuthProvider>
+    </BrowserRouter>
   </StrictMode>
 )

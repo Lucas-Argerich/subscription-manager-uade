@@ -20,7 +20,7 @@ function Expirations() {
         (a, b) => a.expiresAt.seconds - b.expiresAt.seconds
       )[0]
 
-      return { service, expiration: new Date(latestSubscription.expiresAt) }
+      return { service, expiration: new Date(latestSubscription?.expiresAt) }
     })
     .sort((a, b) => a.expiration - b.expiration)
 

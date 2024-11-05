@@ -19,7 +19,6 @@ const FirebaseAuthProvider = ({ children }: { children: React.ReactNode }) => {
   }, [auth])
 
   useEffect(() => {
-    console.log(location)
     if (
       user === null &&
       location.pathname !== '/' &&
