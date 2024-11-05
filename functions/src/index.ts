@@ -4,7 +4,6 @@ import { auth, logger } from 'firebase-functions'
 import { getFunctions } from 'firebase-admin/functions'
 import { onDocumentWritten } from 'firebase-functions/v2/firestore'
 import { onTaskDispatched } from 'firebase-functions/v2/tasks'
-import { SubscriptionDocument } from '../../src/firebase/types'
 
 admin.initializeApp()
 
@@ -39,7 +38,7 @@ export const subscriptionRenewalQueue = onTaskDispatched(
 
       const latest = subscriptions.docs
         .sort((a, b) => new Date(a.data().expiresAt).getTime() - new Date(b.data().expiresAt).getTime())[0]
-        .data() as SubscriptionDocument
+        .data() /* as SubscriptionDocument */
 
       const newDate = new Date(latest.expiresAt)
 
@@ -66,7 +65,7 @@ export const subscriptionRenewalQueue = onTaskDispatched(
         }
       }
 
-      const newSubscriptionData: SubscriptionDocument = {
+      const newSubscriptionData /* : SubscriptionDocument */ = {
         ...latest,
         expiresAt: newDate
       }
@@ -87,7 +86,7 @@ export const setSubscriptionRenewal = onDocumentWritten(
   'users/{userId}/services/{serviceId}/subscriptions/{subscriptionId}',
   async (event) => {
     const { userId, serviceId, subscriptionId } = event.params
-    const data = event.data?.after?.data() as SubscriptionDocument
+    const data = event.data?.after?.data() /* as SubscriptionDocument */
 
     if (!data) {
       logger.info('Subscription document was deleted, no task enqueued.')
