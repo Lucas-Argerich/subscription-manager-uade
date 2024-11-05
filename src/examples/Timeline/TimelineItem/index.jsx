@@ -13,8 +13,9 @@ import { useTimeline } from '~examples/Timeline/context'
 
 // Custom styles for the TimelineItem
 import timelineItem from '~examples/Timeline/TimelineItem/styles'
+import MDAvatar from '~/components/MDAvatar'
 
-function TimelineItem({ color, icon, title, dateTime, description, lastItem }) {
+function TimelineItem({ color, icon, title, dateTime, description, lastItem, image }) {
   const isDark = useTimeline()
 
   return (
@@ -34,7 +35,11 @@ function TimelineItem({ color, icon, title, dateTime, description, lastItem }) {
         zIndex={2}
         sx={{ fontSize: ({ typography: { size } }) => size.sm }}
       >
-        <Icon fontSize="inherit">{icon}</Icon>
+        {!image ? (
+          <Icon fontSize="inherit">{icon}</Icon>
+        ) : (
+          <MDAvatar src={image} name={title} size="sm" variant="rounded" />
+        )}
       </MDBox>
       <MDBox ml={5.75} pt={description ? 0.7 : 0.5} lineHeight={0} maxWidth="30rem">
         <MDTypography variant="button" fontWeight="medium" color={isDark ? 'white' : 'dark'}>
@@ -61,7 +66,7 @@ function TimelineItem({ color, icon, title, dateTime, description, lastItem }) {
 TimelineItem.defaultProps = {
   color: 'info',
   lastItem: false,
-  description: '',
+  description: ''
 }
 
 // Typechecking props for the TimelineItem
@@ -74,13 +79,14 @@ TimelineItem.propTypes = {
     'warning',
     'error',
     'dark',
-    'light',
+    'light'
   ]),
   icon: PropTypes.node.isRequired,
   title: PropTypes.string.isRequired,
   dateTime: PropTypes.string.isRequired,
   description: PropTypes.string,
   lastItem: PropTypes.bool,
+  image: PropTypes.string
 }
 
 export default TimelineItem
