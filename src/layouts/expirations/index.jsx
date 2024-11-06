@@ -1,6 +1,6 @@
 // @mui material components
 import Grid from '@mui/material/Grid'
-import React, { useEffect } from 'react'
+import React from 'react'
 
 // Material Dashboard 2 React components
 import MDBox from '~components/MDBox'
@@ -12,13 +12,13 @@ import Footer from '~layouts/authentication/components/Footer'
 
 // Billing page components
 import useServices from '~/hooks/useServices'
-import { Card, Checkbox, Divider } from '@mui/material'
+import { Card, Divider } from '@mui/material'
 import MDTypography from '~/components/MDTypography'
 import { lowerCapitalize } from '~/utils'
 import TimelineItem from '~/examples/Timeline/TimelineItem'
-import MDButton from '~/components/MDButton'
+import Expiration from './components/Expiration'
 
-function Billing() {
+function Expirations() {
   const services = useServices()
 
   const rows = services
@@ -34,7 +34,6 @@ function Billing() {
         new Date(b.subscription.expiresAt).getTime() - new Date(a.subscription.expiresAt).getTime()
     )
 
-  useEffect(() => {}, [])
   console.log('rows', rows)
 
   return (
@@ -83,14 +82,7 @@ function Billing() {
                               ${row.subscription?.price}
                             </MDTypography>
                           </MDBox>
-                          <MDBox display="flex" flexDirection="column" alignItems="flex-end">
-                            <Checkbox disabled value={row.subscription.isPayed} p={0} />
-                            {row.subscription?.isPayed === false && (
-                              <MDButton size="small" variant="outlined" color="info">
-                                Ya fue Pagado
-                              </MDButton>
-                            )}
-                          </MDBox>
+                          <Expiration service={row.service} subscription={row.subscription} />
                         </MDBox>
                         {rows.length - 1 !== i && (
                           <Divider variant="fullWidth" flexItem sx={{ my: 0, opacity: 1 }} />
@@ -109,4 +101,4 @@ function Billing() {
   )
 }
 
-export default Billing
+export default Expirations

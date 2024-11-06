@@ -1,6 +1,5 @@
 import Dashboard from '~layouts/dashboard'
 import Tables from '~layouts/tables'
-import Billing from '~layouts/billing'
 import SignIn from '~layouts/authentication/sign-in'
 import SignUp from '~layouts/authentication/sign-up'
 import ResetPassword from '~/layouts/authentication/reset-password'
@@ -12,6 +11,7 @@ import ReceiptLongIcon from '@mui/icons-material/ReceiptLong'
 import LoginIcon from '@mui/icons-material/Login'
 import LogoutIcon from '@mui/icons-material/Logout'
 import SignOut from './layouts/authentication/sign-out'
+import Expirations from './layouts/expirations'
 
 const routes = [
   {
@@ -36,7 +36,7 @@ const routes = [
     key: 'billing',
     icon: <ReceiptLongIcon fontSize="small" />,
     route: '/billing',
-    component: <Billing />
+    component: <Expirations />
   },
   {
     type: 'collapse',
