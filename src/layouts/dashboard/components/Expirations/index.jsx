@@ -17,7 +17,7 @@ function Expirations() {
   const expirations = services
     ?.map((service) => {
       const latestSubscription = service.subscriptions?.sort(
-        (a, b) => a.expiresAt.seconds - b.expiresAt.seconds
+        (a, b) => new Date(b.expiresAt).getTime() - new Date(a.expiresAt).getTime() 
       )[0]
 
       return { service, expiration: new Date(latestSubscription?.expiresAt) }
