@@ -40,7 +40,7 @@ const routes = [
   },
   {
     type: 'collapse',
-    name: 'Sign In',
+    name: 'Iniciar Sesión',
     key: 'sign-in',
     icon: <LoginIcon fontSize="small" />,
     route: '/authentication/sign-in',
@@ -48,7 +48,7 @@ const routes = [
   },
   {
     type: 'collapse',
-    name: 'Sign Up',
+    name: 'Registrarse',
     key: 'sign-up',
     icon: <LogoutIcon fontSize="small" />,
     route: '/authentication/sign-up',
@@ -56,7 +56,7 @@ const routes = [
   },
   {
     type: 'collapse',
-    name: 'Sign Out',
+    name: 'Cerrar Sesión',
     icon: <LogoutIcon fontSize="small" />,
     route: '/authentication/sign-out',
     component: <SignOut />
