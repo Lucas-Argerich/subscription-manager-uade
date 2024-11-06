@@ -31,7 +31,7 @@ function Billing() {
     .sort(
       (a, b) =>
         a.subscription.isPayed - b.subscription.isPayed ||
-        new Date(a.subscription.expiresAt).getTime() - new Date(b.subscription.expiresAt).getTime()
+        new Date(b.subscription.expiresAt).getTime() - new Date(a.subscription.expiresAt).getTime()
     )
 
   useEffect(() => {}, [])
