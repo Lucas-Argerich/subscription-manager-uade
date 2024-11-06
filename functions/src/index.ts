@@ -37,7 +37,7 @@ export const subscriptionRenewalQueue = onTaskDispatched(
         .get()
 
       const latest = subscriptions.docs
-        .sort((a, b) => new Date(a.data().expiresAt).getTime() - new Date(b.data().expiresAt).getTime())[0]
+        .sort((a, b) => new Date(b.data().expiresAt).getTime() - new Date(a.data().expiresAt).getTime())[0]
         .data() /* as SubscriptionDocument */
 
       const newDate = new Date(latest.expiresAt)
@@ -74,7 +74,7 @@ export const subscriptionRenewalQueue = onTaskDispatched(
         .collection(`users/${userId}/services/${serviceId}/subscriptions`)
         .add(newSubscriptionData)
 
-      logger.info(`Successfully renewed subscription: ${subscriptionId} for user: ${userId}`)
+      logger.info(`Successfully renewed subscription: ${subscriptionId} for user: ${userId} => ${newDate.toLocaleDateString('en-CA')}`)
     } catch (error) {
       logger.error('Error processing subscription renewal:', error)
       throw new Error('Subscription renewal failed')
