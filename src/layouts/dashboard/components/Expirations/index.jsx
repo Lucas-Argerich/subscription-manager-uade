@@ -15,15 +15,13 @@ function Expirations() {
   const services = useServices()
 
   const expirations = services
-    ?.filter((service) =>
-      service.subscriptions?.some((subscription) => subscription.isPayed === false)
-    )
-    .map((service) => {
+    ?.map((service) => {
       const { subscriptions, ...rest } = service
 
       return subscriptions?.map((subscription) => ({ subscription, service: rest })) ?? []
     })
     .reduce((result, current) => result.concat(current), [])
+    .filter(({ subscription }) => subscription.isPayed === false)
     .sort(
       (a, b) =>
         a.subscription.isPayed - b.subscription.isPayed ||
@@ -71,7 +69,7 @@ function Expirations() {
             dateTime={new Date(expiration.subscription?.expiresAt).toLocaleDateString({
               language: 'es-EN'
             })}
-            lastItem={6 === i}
+            lastItem={Math.min(6, expirations?.length - 1) === i}
           />
         ))}
       </MDBox>
