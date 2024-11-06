@@ -86,7 +86,10 @@ export const setSubscriptionRenewal = onDocumentWritten(
   'users/{userId}/services/{serviceId}/subscriptions/{subscriptionId}',
   async (event) => {
     const { userId, serviceId, subscriptionId } = event.params
+    const before = event.data?.before?.data()
     const data = event.data?.after?.data() /* as SubscriptionDocument */
+
+    if (before && (before?.price === data?.price)) return
 
     if (!data) {
       logger.info('Subscription document was deleted, no task enqueued.')
