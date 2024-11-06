@@ -15,15 +15,14 @@ import { useTimeline } from '~examples/Timeline/context'
 import timelineItem from '~examples/Timeline/TimelineItem/styles'
 import MDAvatar from '~/components/MDAvatar'
 
-function TimelineItem({ color, icon, title, dateTime, description, lastItem, image }) {
+function TimelineItem({ color, icon, title, dateTime, description, lastItem, image, ...rest }) {
   const isDark = useTimeline()
 
   return (
     <MDBox
       position="relative"
-      pt={1.5}
-      pb={1.5}
       sx={(theme) => timelineItem(theme, { lastItem, isDark })}
+      {...rest}
     >
       <MDBox
         display="flex"

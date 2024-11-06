@@ -63,6 +63,8 @@ function Expirations() {
                             size="lg"
                             description={row.service?.domain}
                             lastItem={rows.length - 1 === i}
+                            pt={1.5}
+                            pb={1.5}
                           />
                           <MDBox
                             display="flex"

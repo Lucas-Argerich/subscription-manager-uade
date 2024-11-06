@@ -15,14 +15,20 @@ function Expirations() {
   const services = useServices()
 
   const expirations = services
-    ?.map((service) => {
-      const latestSubscription = service.subscriptions?.sort(
-        (a, b) => new Date(b.expiresAt).getTime() - new Date(a.expiresAt).getTime() 
-      )[0]
+    ?.filter((service) =>
+      service.subscriptions?.some((subscription) => subscription.isPayed === false)
+    )
+    .map((service) => {
+      const { subscriptions, ...rest } = service
 
-      return { service, expiration: new Date(latestSubscription?.expiresAt) }
+      return subscriptions?.map((subscription) => ({ subscription, service: rest })) ?? []
     })
-    .sort((a, b) => a.expiration - b.expiration)
+    .reduce((result, current) => result.concat(current), [])
+    .sort(
+      (a, b) =>
+        a.subscription.isPayed - b.subscription.isPayed ||
+        new Date(a.subscription.expiresAt).getTime() - new Date(b.subscription.expiresAt).getTime()
+    )
 
   return (
     <Card sx={{ height: '100%' }}>
@@ -35,27 +41,37 @@ function Expirations() {
             <MDTypography display="inline" variant="body2" verticalAlign="middle">
               <Icon sx={{ color: ({ palette: { success } }) => success.main }}>arrow_upward</Icon>
             </MDTypography>
-            &nbsp; Proximo vencimiento en{' '}
-            <MDTypography variant="button" color="text" fontWeight="medium">
-              {expirations &&
-                Math.round(
-                  (expirations[0]?.expiration.getTime() - new Date().getTime()) / 86400000
-                )}{' '}
-            </MDTypography>
-            días
+            {expirations?.length ? (
+              <>
+                &nbsp; Proximo vencimiento en{' '}
+                <MDTypography variant="button" color="text" fontWeight="medium">
+                  {expirations &&
+                    Math.round(
+                      (new Date(expirations[0]?.subscription?.expiresAt).getTime() -
+                        new Date().getTime()) /
+                        86400000
+                    )}{' '}
+                </MDTypography>
+                días
+              </>
+            ) : (
+              ' Sin próximos vencimientos'
+            )}
           </MDTypography>
         </MDBox>
       </MDBox>
-      <MDBox p={2}>
-        {expirations?.map((expiration, i) => (
+      <MDBox p={2} pt={0}>
+        {expirations?.slice(0, 7).map((expiration, i) => (
           <TimelineItem
             color="error"
             image={`https://cdn.brandfetch.io/${
               expiration.service.domain ?? expiration.service.serviceName.replace(' ', '') + '.com'
             }/w/400/h/400/fallback/lettermark`}
             title={lowerCapitalize(expiration.service.serviceName)}
-            dateTime={expiration.expiration.toLocaleDateString({ language: 'es-EN' })}
-            lastItem={expirations.length - 1 === i}
+            dateTime={new Date(expiration.subscription?.expiresAt).toLocaleDateString({
+              language: 'es-EN'
+            })}
+            lastItem={6 === i}
           />
         ))}
       </MDBox>
