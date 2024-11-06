@@ -35,11 +35,14 @@ function Expirations() {
             <MDTypography display="inline" variant="body2" verticalAlign="middle">
               <Icon sx={{ color: ({ palette: { success } }) => success.main }}>arrow_upward</Icon>
             </MDTypography>
-            &nbsp;
+            &nbsp; Proximo vencimiento en{' '}
             <MDTypography variant="button" color="text" fontWeight="medium">
-              24%
-            </MDTypography>{' '}
-            este mes
+              {expirations &&
+                Math.round(
+                  (expirations[0]?.expiration.getTime() - new Date().getTime()) / 86400000
+                )}{' '}
+            </MDTypography>
+            días
           </MDTypography>
         </MDBox>
       </MDBox>
