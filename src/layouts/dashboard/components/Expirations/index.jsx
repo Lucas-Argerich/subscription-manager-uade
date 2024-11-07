@@ -20,7 +20,7 @@ function Expirations() {
 
       return subscriptions?.map((subscription) => ({ subscription, service: rest })) ?? []
     })
-    .reduce((result, current) => result.concat(current), [])
+    .flat()
     .filter(({ subscription }) => subscription.isPayed === false)
     .sort(
       (a, b) =>
