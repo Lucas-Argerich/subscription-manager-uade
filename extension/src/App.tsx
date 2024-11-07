@@ -1,8 +1,11 @@
 function App() {
   return (
-    <>
-      <p>Hello World!</p>
-    </>
+    <main className="w-56">
+      <div className="flex">
+        <h1>Subtrack</h1>
+        <p>Login</p>
+      </div>
+    </main>
   )
 }
 
