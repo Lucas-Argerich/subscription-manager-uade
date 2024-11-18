@@ -3,11 +3,12 @@
   "version": "1.0",
   "manifest_version": 3,
   "permissions": [
-     "activeTab",
-     "scripting"
+     "storage",
+     "identity"
   ],
   "action": {
     "default_popup": "index.html",
-    "default_title": "Subtrack Extension"
+    "default_title": "Subtrack Extension",
+    "default_icon": "icon.png"
   }
 }
