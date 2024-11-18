@@ -1,6 +1,5 @@
 {
   "name": "Subtrack Extension",
-  "description": "This extension is made for demonstration purposes",
   "version": "1.0",
   "manifest_version": 3,
   "permissions": [
@@ -9,6 +8,6 @@
   ],
   "action": {
     "default_popup": "index.html",
-    "default_title": "React Chrome Extension"
+    "default_title": "Subtrack Extension"
   }
 }
