@@ -3,7 +3,7 @@ import { getAuth, User } from 'firebase/auth'
 import { createContext, useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
-type ContextState = { user: User | null }
+type ContextState = { user: User | null | undefined }
 
 const FirebaseAuthContext = createContext<ContextState | undefined>(undefined)
 
@@ -12,7 +12,6 @@ const FirebaseAuthProvider = ({ children }: { children: React.ReactNode }) => {
   const location = useLocation()
   const auth = getAuth()
   const [user, setUser] = useState<User | null | undefined>(undefined)
-  const value = { user: user ?? null }
 
   useEffect(() => {
     return auth.onAuthStateChanged(setUser)
@@ -28,7 +27,7 @@ const FirebaseAuthProvider = ({ children }: { children: React.ReactNode }) => {
       navigate('/authentication/sign-in')
   }, [location, navigate, user])
 
-  return <FirebaseAuthContext.Provider value={value}>{children}</FirebaseAuthContext.Provider>
+  return <FirebaseAuthContext.Provider value={{user}}>{children}</FirebaseAuthContext.Provider>
 }
 
 export { FirebaseAuthContext, FirebaseAuthProvider }

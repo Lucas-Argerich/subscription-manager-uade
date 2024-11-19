@@ -1,11 +1,14 @@
 import * as admin from 'firebase-admin'
 import { getFirestore } from 'firebase-admin/firestore'
-import { auth, logger } from 'firebase-functions'
+import { auth, https, logger } from 'firebase-functions'
 import { getFunctions } from 'firebase-admin/functions'
 import { onDocumentWritten } from 'firebase-functions/v2/firestore'
 import { onTaskDispatched } from 'firebase-functions/v2/tasks'
+import serviceAccount from './serviceAccountKey.json'
 
-admin.initializeApp()
+const app = admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount as admin.ServiceAccount)
+})
 
 export const createUserDocument = auth.user().onCreate((user) => {
   getFirestore()
@@ -115,3 +118,25 @@ export const setSubscriptionRenewal = onDocumentWritten(
     logger.info(`Scheduled renewal for subscription ${subscriptionId} at ${renewalDate}`)
   }
 )
+
+export const verifyIdTokenAndCreateCustomToken = https.onCall(async (data) => {
+  // Get the ID token from the request data
+  const idToken = data.idToken
+
+  try {
+    // Verify the ID token
+    const decodedToken = await app.auth().verifyIdToken(idToken)
+
+    const uid = decodedToken.uid
+
+    // Generate a custom token based on the user's UID
+    const customToken = await app.auth().createCustomToken(uid)
+
+    // Return the custom token
+    return { customToken: customToken }
+  } catch (error) {
+    // Handle any errors
+    console.error('Error verifying ID token or creating custom token:', error)
+    throw new https.HttpsError('unauthenticated', 'Invalid ID token')
+  }
+})

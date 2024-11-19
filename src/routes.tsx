@@ -12,6 +12,7 @@ import LoginIcon from '@mui/icons-material/Login'
 import LogoutIcon from '@mui/icons-material/Logout'
 import SignOut from './layouts/authentication/sign-out'
 import Expirations from './layouts/expirations'
+import Extension from './layouts/authentication/extension'
 
 const routes = [
   {
@@ -64,6 +65,10 @@ const routes = [
   {
     route: '/authentication/reset-password',
     component: <ResetPassword />
+  },
+  {
+    route: '/authentication/extension',
+    component: <Extension />
   }
 ]
 
