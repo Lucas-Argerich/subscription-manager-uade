@@ -5,6 +5,12 @@ import { auth } from './firebase'
 
 function App() {
   const user = useUser()
+
+  const handleSignOut = () => {
+    signOut(auth)
+    chrome.storage.local.remove('subtrack_token')
+  }
+
   return (
     <main className="w-96 min-h-96 border border-sky-500 bg-background font-['Inter'] text-primary">
       <Header />
@@ -24,7 +30,7 @@ function App() {
           user && 
           <>
             <p className="font-extrabold text-lg">Registrando tu movimiento por la web!</p>
-            <button className="mt-4 px-4 py-2 rounded border border-primary" onClick={() => signOut(auth)}>Cerrar Sesión</button>
+            <button className="mt-4 px-4 py-2 rounded border border-primary" onClick={handleSignOut}>Cerrar Sesión</button>
           </>
         }
       </section>

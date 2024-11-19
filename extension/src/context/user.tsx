@@ -45,22 +45,24 @@ const UserProvider = ({ children }: { children: React.ReactNode }) => {
     ) => {
       console.log(changes, areaName)
       if (areaName === 'local' && changes['subtrack_token']) {
-        const token = changes.user.newValue
+        const token = changes['subtrack_token'].newValue
 
-        await fetch(
-          'https://us-central1-subscription-manager-uade.cloudfunctions.net/verifyIdTokenAndCreateCustomToken',
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              data: { idToken: token }
-            })
-          }
-        )
-          .then((res) => res.json())
-          .then((data) => signInWithCustomToken(auth, data.result.customToken))
+        if (token) {
+          await fetch(
+            'https://us-central1-subscription-manager-uade.cloudfunctions.net/verifyIdTokenAndCreateCustomToken',
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                data: { idToken: token }
+              })
+            }
+          )
+            .then((res) => res.json())
+            .then((data) => signInWithCustomToken(auth, data.result.customToken))
+        }
       }
     }
 
