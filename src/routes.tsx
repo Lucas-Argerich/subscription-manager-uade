@@ -13,6 +13,7 @@ import LogoutIcon from '@mui/icons-material/Logout'
 import SignOut from './layouts/authentication/sign-out'
 import Expirations from './layouts/expirations'
 import Extension from './layouts/authentication/extension'
+import Homepage from './layouts/homepage'
 
 const routes = [
   {
@@ -69,6 +70,10 @@ const routes = [
   {
     route: '/authentication/extension',
     component: <Extension />
+  },
+  {
+    route: '/',
+    component: <Homepage />
   }
 ]
 

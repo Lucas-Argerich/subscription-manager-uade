@@ -20,13 +20,11 @@ import MDTypography from '~components/MDTypography'
 import MDInput from '~components/MDInput'
 import MDButton from '~components/MDButton'
 
-// Authentication layout components
-import BasicLayout from '~layouts/authentication/components/BasicLayout'
-
 // Images
 import bgImage from '~assets/images/bg-sign-in-basic.jpeg'
 import { FacebookAuthProvider, GithubAuthProvider, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth'
 import { auth } from '~/firebase'
+import CoverLayout from '../components/CoverLayout'
 
 function Basic() {
   const navigate = useNavigate()
@@ -136,7 +134,7 @@ function Basic() {
   }
 
   return (
-    <BasicLayout image={bgImage}>
+    <CoverLayout image={bgImage}>
       <Card>
         <MDBox
           variant="gradient"
@@ -241,7 +239,7 @@ function Basic() {
           </MDBox>
         </MDBox>
       </Card>
-    </BasicLayout>
+    </CoverLayout>
   )
 }
 
