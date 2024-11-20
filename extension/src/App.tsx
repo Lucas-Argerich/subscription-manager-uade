@@ -21,18 +21,22 @@ function App() {
               <div className="size-32 rounded-full flex justify-center items-center text-center bg-primary/80">
                 <div className="size-24 rounded-full flex justify-center items-center text-center bg-primary">
                   INGRESAR
-                </div> 
+                </div>
               </div>
             </button>
           </a>
         )}
-        {
-          user && 
+        {user && (
           <>
             <p className="font-extrabold text-lg">Registrando tu movimiento por la web!</p>
-            <button className="mt-4 px-4 py-2 rounded border border-primary" onClick={handleSignOut}>Cerrar Sesión</button>
+            <button
+              className="mt-4 px-4 py-2 rounded border border-primary"
+              onClick={handleSignOut}
+            >
+              Cerrar Sesión
+            </button>
           </>
-        }
+        )}
       </section>
     </main>
   )

@@ -2,7 +2,7 @@
   "name": "Subtrack Extension",
   "version": "1.0",
   "manifest_version": 3,
-  "permissions": ["storage", "activeTab", "tabs"],
+  "permissions": ["storage", "webNavigation"],
   "externally_connectable": {
     "matches": ["http://localhost/*"]
   },
@@ -12,10 +12,10 @@
     "default_icon": "icon.png"
   },
   "background": {
-    "service_worker": "service_worker.js"
+    "service_worker": "service_worker.js",
+    "type": "module"
   },
   "content_scripts": [
     { "js": ["content_script.js"], "matches": ["http://localhost/*"] }
   ]
 }
- 
