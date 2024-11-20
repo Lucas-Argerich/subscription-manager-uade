@@ -60,10 +60,10 @@ function Cover() {
           textAlign="center"
         >
           <MDTypography variant="h3" fontWeight="medium" color="white" mt={1}>
-            Reset Password
+            Cambiar Contraseña
           </MDTypography>
           <MDTypography display="block" variant="button" color="white" my={1} mx={2}>
-            You will receive an e-mail, only if you own an account
+            Vas a recibir un email, solo si pertenece a una cuenta.
           </MDTypography>
         </MDBox>
         <MDBox pt={4} pb={3} px={3}>
@@ -80,7 +80,7 @@ function Cover() {
             )}
             <MDBox mt={6} mb={1}>
               <MDButton variant="gradient" color="info" type="submit" fullWidth disabled={!email || isSubmitted || isSent} >
-                {isSent ? <Check/> : 'reset'}
+                {isSent ? <Check/> : 'Enviar'}
               </MDButton>
             </MDBox>
           </MDBox>

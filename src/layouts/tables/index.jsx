@@ -14,17 +14,20 @@ import Footer from '~layouts/authentication/components/Footer'
 import DataTable from '~examples/Tables/DataTable'
 import useServices from '~/hooks/useServices'
 import Project from './components/Project'
-import HiddenPassword from './components/HiddenPassword'
 import MDOptions from '~/components/MDOptions'
-import Progress from './components/Progress'
 import { lowerCapitalize } from '~/utils'
+import { db } from '~/firebase'
+import { deleteDoc, doc } from 'firebase/firestore'
+import useUser from '~/hooks/useUser'
 
 function Tables() {
+  const user = useUser()
   const services = useServices()
 
-  const handleEdit = () => {}
-
-  const handleDelete = () => {}
+  const handleDelete = async (id) => {
+    if (!user) return
+    await deleteDoc(doc(db, 'users', user.uid, 'services', id))
+  }
 
   const columns = [
     { Header: 'Servicio', accessor: 'service', width: '30%', align: 'left' },
@@ -32,9 +35,7 @@ function Tables() {
     { Header: 'Costo Acumulado', accessor: 'accumulated', align: 'left' },
     { Header: 'Plan', accessor: 'plan', align: 'center' },
     { Header: 'Uso', accessor: 'use', align: 'center' },
-    { Header: 'Cuenta', accessor: 'account', align: 'center' },
-    { Header: 'Contraseña', accessor: 'password', align: 'center' },
-    { Header: 'Seguridad credenciales', accessor: 'security', align: 'center' },
+    { Header: 'Costo por Uso', accessor: 'relation', align: 'center' },
     { Header: 'Acción', accessor: 'action', align: 'center' }
   ]
 
@@ -43,6 +44,11 @@ function Tables() {
       const latestSubscription = service.subscriptions?.sort(
         (a, b) => new Date(a.expiresAt).getTime() - new Date(b.expiresAt).getTime()
       )[0]
+
+      const accumulatedCost = service.subscriptions?.reduce(
+        (count, val) => count + (Number.isNaN(parseInt(val.price)) ? 0 : parseInt(val.price)),
+        0
+      )
 
       return {
         key: i,
@@ -61,11 +67,7 @@ function Tables() {
         ),
         accumulated: (
           <MDTypography component="p" variant="button" color="text" fontWeight="medium">
-            $
-            {service.subscriptions?.reduce(
-              (count, val) => count + (Number.isNaN(parseInt(val.price)) ? 0 : parseInt(val.price)),
-              0
-            )}
+            ${accumulatedCost}
           </MDTypography>
         ),
         plan: (
@@ -78,16 +80,16 @@ function Tables() {
             {service.logins?.length} Logs
           </MDTypography>
         ),
-        account: (
-          <MDTypography component="p" variant="caption" color="text" fontWeight="medium">
-            {service.username}
-          </MDTypography>
+        relation: (
+          <MDBox>
+            <MDTypography component="p" variant="caption" color="text" fontWeight="medium">
+              ${(accumulatedCost/(service.logins?.length || 1)).toFixed(2)}
+            </MDTypography>
+          </MDBox>
         ),
-        password: <HiddenPassword password={service.passwordEncrypted} />,
-        security: <Progress color="info" value={60} />,
         action: (
           <MDTypography component="a" href="#" color="text">
-            <MDOptions onEdit={handleEdit} onDelete={handleDelete} />
+            <MDOptions onDelete={() => handleDelete(service.id)} />
           </MDTypography>
         )
       }

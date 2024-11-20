@@ -18,7 +18,7 @@ import Homepage from './layouts/homepage'
 const routes = [
   {
     type: 'collapse',
-    name: 'Home',
+    name: 'Inicio',
     key: 'dashboard',
     icon: <DashboardIcon fontSize="small" />,
     route: '/dashboard',

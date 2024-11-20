@@ -9,7 +9,7 @@ interface RowActionsProps {
   onDelete: () => void;
 }
 
-const MDOptions: React.FC<RowActionsProps> = ({ onEdit, onDelete }) => {
+const MDOptions: React.FC<RowActionsProps> = ({ onDelete }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
 
@@ -43,14 +43,14 @@ const MDOptions: React.FC<RowActionsProps> = ({ onEdit, onDelete }) => {
           },
         }}
       >
-        <MenuItem
+        {/* <MenuItem
           onClick={() => {
             onEdit()
             handleClose()
           }}
         >
           Editar
-        </MenuItem>
+        </MenuItem> */}
         <MenuItem
           onClick={() => {
             onDelete()

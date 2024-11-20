@@ -122,7 +122,7 @@ const SubForm = () => {
           }}
         >
           <Typography variant="h6" component="h2" gutterBottom>
-            Load Subscription
+            Cargar Suscripción
           </Typography>
           {error && (
             <MDBox>
@@ -133,7 +133,7 @@ const SubForm = () => {
           )}
           <form onSubmit={handleSubmit}>
             <TextField
-              label="Service/Platform"
+              label="Servicio/Plataforma"
               name="service"
               value={formData.service}
               onChange={handleChange}
@@ -142,7 +142,7 @@ const SubForm = () => {
               required
             />
             <TextField
-              label="Domain (ex. subtrack.com)"
+              label="Dominio (ej. subtrack.com)"
               name="domain"
               value={formData.domain}
               onChange={handleChange}
@@ -154,23 +154,23 @@ const SubForm = () => {
             <MDBox display="flex" gap="20px">
               <FormControl fullWidth margin="normal">
                 <InputLabel id="planLabel" required>
-                  Subscription Plan
+                  Plan de Suscripción
                 </InputLabel>
                 <Select
                   name="plan"
                   labelId="planLabel"
-                  label="Subscription Plan"
+                  label="Plan de Suscripción"
                   value={formData.plan}
                   onChange={handleChange}
                   fullWidth
                   required
                 >
-                  <MenuItem value="free">Free</MenuItem>
-                  <MenuItem value="basic">Basic</MenuItem>
-                  <MenuItem value="standard">Standard</MenuItem>
+                  <MenuItem value="free">Gratis</MenuItem>
+                  <MenuItem value="basic">Básico</MenuItem>
+                  <MenuItem value="standard">Estándar</MenuItem>
                   <MenuItem value="premium">Premium</MenuItem>
-                  <MenuItem value="family">Family</MenuItem>
-                  <MenuItem value="enterprise">Enterprise</MenuItem>
+                  <MenuItem value="family">Familiar</MenuItem>
+                  <MenuItem value="enterprise">Empresarial</MenuItem>
                 </Select>
               </FormControl>
               <TextField
@@ -189,7 +189,7 @@ const SubForm = () => {
             </MDBox>
             <MDBox display="flex" gap="20px">
               <TextField
-                label="Fee"
+                label="Tarifa"
                 name="fee"
                 type="number"
                 inputMode="numeric"
@@ -212,26 +212,26 @@ const SubForm = () => {
               />
               <FormControl fullWidth margin="normal">
                 <InputLabel id="cycleLabel" required={formData.plan !== 'free'}>
-                  Billing Cycle
+                  Periodo de Facturación
                 </InputLabel>
                 <Select
                   name="cycle"
                   labelId="cycleLabel"
-                  label="Billing Cycle"
+                  label="Periodo de Facturación"
                   value={formData.cycle}
                   onChange={handleChange}
                   disabled={formData.plan === 'free'}
                   required={formData.plan !== 'free'}
                   fullWidth
                 >
-                  <MenuItem value="monthly">Monthly</MenuItem>
-                  <MenuItem value="quarterly">Quarterly</MenuItem>
-                  <MenuItem value="annually">Annually</MenuItem>
-                  <MenuItem value="weekly">Weekly</MenuItem>
+                  <MenuItem value="monthly">Mensual</MenuItem>
+                  <MenuItem value="quarterly">Trimestral</MenuItem>
+                  <MenuItem value="annually">Anual</MenuItem>
+                  <MenuItem value="weekly">Semanal</MenuItem>
                 </Select>
               </FormControl>
             </MDBox>
-            <Divider />
+            {/* <Divider />
             <Typography type="h4" variant="h6">
               Credentials
             </Typography>
@@ -253,7 +253,7 @@ const SubForm = () => {
               fullWidth
               margin="normal"
               required
-            />
+            /> */}
             <Button
               type="submit"
               variant="contained"

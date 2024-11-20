@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // react-router-dom components
 import { Link, useNavigate } from 'react-router-dom'
@@ -25,9 +25,11 @@ import bgImage from '~assets/images/bg-sign-in-basic.jpeg'
 import { FacebookAuthProvider, GithubAuthProvider, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth'
 import { auth } from '~/firebase'
 import CoverLayout from '../components/CoverLayout'
+import useUser from '~/hooks/useUser'
 
 function Basic() {
   const navigate = useNavigate()
+  const user = useUser()  
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -36,6 +38,12 @@ function Basic() {
   const [error, setError] = useState('')
 
   const [rememberMe, setRememberMe] = useState(false)
+
+  useEffect(() => {
+    if (user) {
+      navigate('dashboard')
+    }
+  }, [user, navigate])
 
   const handleSetRememberMe = () => setRememberMe(!rememberMe)
 
@@ -174,7 +182,7 @@ function Basic() {
               <MDInput type="email" label="Email" fullWidth onChange={(e) => setEmail(e.target.value)} />
             </MDBox>
             <MDBox mb={1}>
-              <MDInput type="password" label="Password" fullWidth onChange={(e) => setPassword(e.target.value)} />
+              <MDInput type="password" label="Contraseña" fullWidth onChange={(e) => setPassword(e.target.value)} />
             </MDBox>
             {error && (
               <MDBox>
@@ -194,7 +202,7 @@ function Basic() {
                   fontSize="0.75rem"
                   textGradient
                 >
-                  Forgot your password?
+                  ¿Olvidaste tu contraseña?
                 </MDTypography>
               </MDTypography>
             </MDBox>
@@ -207,7 +215,7 @@ function Basic() {
                 onClick={handleSetRememberMe}
                 sx={{ cursor: 'pointer', userSelect: 'none', ml: -1 }}
               >
-                &nbsp;&nbsp;Seguir logueado
+                &nbsp;&nbsp;Permanecer ingresado
               </MDTypography>
             </MDBox>
             <MDBox mt={4} mb={1}>
@@ -218,12 +226,12 @@ function Basic() {
                 onClick={handleLoginWithEmailAndPassword}
                 disabled={isSubmitted}
               >
-                sign in
+                Ingresar
               </MDButton>
             </MDBox>
             <MDBox mt={3} mb={1} textAlign="center">
-              <MDTypography variant="button" color="text">
-                ¿No tenes una cuenta?{' '}
+              <MDTypography variant="button" color="text" display="flex" flexDirection="column">
+                ¿No tenes una cuenta?
                 <MDTypography
                   component={Link}
                   to="/authentication/sign-up"
