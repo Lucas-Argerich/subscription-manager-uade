@@ -21,6 +21,7 @@ import { createUserWithEmailAndPassword, deleteUser } from 'firebase/auth'
 import { auth, db } from '~/firebase'
 import { doc, updateDoc } from 'firebase/firestore'
 import useUser from '~/hooks/useUser'
+import PaymentForm from './components/PaymentForm' // Import the PaymentForm component
 
 function Cover() {
   const navigate = useNavigate()
@@ -32,9 +33,10 @@ function Cover() {
 
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [error, setError] = useState('')
+  const [isPaymentStep, setIsPaymentStep] = useState(false) // New state for payment step
 
   useEffect(() => {
-    if (user) {
+    if (user && !isPaymentStep) {
       navigate('dashboard')
     }
   }, [user, navigate])
@@ -62,7 +64,7 @@ function Cover() {
         })
       }, 3000)
 
-      navigate('/authentication/sign-in')
+      setIsPaymentStep(true) // Trigger the payment step after registration
     } catch (err) {
       switch (err.code) {
         case 'auth/email-already-in-use': {
@@ -84,109 +86,117 @@ function Cover() {
   return (
     <CoverLayout image={bgImage}>
       <Card>
-        <MDBox
-          variant="gradient"
-          bgColor="info"
-          borderRadius="lg"
-          coloredShadow="success"
-          mx={2}
-          mt={-3}
-          p={3}
-          mb={1}
-          textAlign="center"
-        >
-          <MDTypography variant="h4" fontWeight="medium" color="white" mt={1}>
-            Únete a nosotros hoy
-          </MDTypography>
-          <MDTypography display="block" variant="button" color="white" my={1} mx={2}>
-            Ingresa tu email y contraseña para registrarte
-          </MDTypography>
-        </MDBox>
-        <MDBox pt={4} pb={3} px={3}>
-          <MDBox component="form" role="form">
-            <MDBox mb={2}>
-              <MDInput
-                type="text"
-                label="Nombre"
-                variant="standard"
-                fullWidth
-                onChange={(e) => setName(e.target.value)}
-              />
+        {isPaymentStep ? (
+          // Render the payment form if registration was successful
+          <PaymentForm email={email} />
+        ) : (
+          // Render the registration form
+          <>
+            <MDBox
+              variant="gradient"
+              bgColor="info"
+              borderRadius="lg"
+              coloredShadow="success"
+              mx={2}
+              mt={-3}
+              p={3}
+              mb={1}
+              textAlign="center"
+            >
+              <MDTypography variant="h4" fontWeight="medium" color="white" mt={1}>
+                Únete a nosotros hoy
+              </MDTypography>
+              <MDTypography display="block" variant="button" color="white" my={1} mx={2}>
+                Ingresa tu email y contraseña para registrarte
+              </MDTypography>
             </MDBox>
-            <MDBox mb={2}>
-              <MDInput
-                type="email"
-                label="Email"
-                variant="standard"
-                fullWidth
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </MDBox>
-            <MDBox mb={2}>
-              <MDInput
-                type="password"
-                label="Contraseña"
-                variant="standard"
-                fullWidth
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </MDBox>
-            {error && (
-              <MDBox>
-                <MDTypography fontSize="0.75rem" color="error">
-                  {error}
-                </MDTypography>
+            <MDBox pt={4} pb={3} px={3}>
+              <MDBox component="form" role="form">
+                <MDBox mb={2}>
+                  <MDInput
+                    type="text"
+                    label="Nombre"
+                    variant="standard"
+                    fullWidth
+                    onChange={(e) => setName(e.target.value)}
+                  />
+                </MDBox>
+                <MDBox mb={2}>
+                  <MDInput
+                    type="email"
+                    label="Email"
+                    variant="standard"
+                    fullWidth
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </MDBox>
+                <MDBox mb={2}>
+                  <MDInput
+                    type="password"
+                    label="Contraseña"
+                    variant="standard"
+                    fullWidth
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </MDBox>
+                {error && (
+                  <MDBox>
+                    <MDTypography fontSize="0.75rem" color="error">
+                      {error}
+                    </MDTypography>
+                  </MDBox>
+                )}
+                <MDBox display="flex" alignItems="center" ml={-1}>
+                  <Checkbox />
+                  <MDTypography
+                    variant="button"
+                    fontWeight="regular"
+                    color="text"
+                    sx={{ cursor: 'pointer', userSelect: 'none', ml: -1 }}
+                  >
+                    &nbsp;&nbsp;Acepto los&nbsp;
+                  </MDTypography>
+                  <MDTypography
+                    component="a"
+                    href="#"
+                    variant="button"
+                    fontWeight="bold"
+                    color="info"
+                    textGradient
+                  >
+                    Términos y Condiciones
+                  </MDTypography>
+                </MDBox>
+                <MDBox mt={4} mb={1}>
+                  <MDButton
+                    variant="gradient"
+                    color="info"
+                    fullWidth
+                    onClick={handleRegister}
+                    disabled={isSubmitted}
+                  >
+                    Registrarte
+                  </MDButton>
+                </MDBox>
+                <MDBox mt={3} mb={1} textAlign="center">
+                  <MDTypography variant="button" color="text" display="flex" flexDirection="column">
+                    ¿Ya tienes una cuenta?
+                    <MDTypography
+                      component={Link}
+                      to="/authentication/sign-in"
+                      variant="button"
+                      color="info"
+                      fontWeight="medium"
+                      textGradient
+                    >
+                      Iniciar Sesión
+                    </MDTypography>
+                  </MDTypography>
+                </MDBox>
               </MDBox>
-            )}
-            <MDBox display="flex" alignItems="center" ml={-1}>
-              <Checkbox />
-              <MDTypography
-                variant="button"
-                fontWeight="regular"
-                color="text"
-                sx={{ cursor: 'pointer', userSelect: 'none', ml: -1 }}
-              >
-                &nbsp;&nbsp;Acepto los&nbsp;
-              </MDTypography>
-              <MDTypography
-                component="a"
-                href="#"
-                variant="button"
-                fontWeight="bold"
-                color="info"
-                textGradient
-              >
-                Términos y Condiciones
-              </MDTypography>
             </MDBox>
-            <MDBox mt={4} mb={1}>
-              <MDButton
-                variant="gradient"
-                color="info"
-                fullWidth
-                onClick={handleRegister}
-                disabled={isSubmitted}
-              >
-                Registrarte
-              </MDButton>
-            </MDBox>
-            <MDBox mt={3} mb={1} textAlign="center">
-              <MDTypography variant="button" color="text" display="flex" flexDirection="column">
-                ¿Ya tienes una cuenta?
-                <MDTypography
-                  component={Link}
-                  to="/authentication/sign-in"
-                  variant="button"
-                  color="info"
-                  fontWeight="medium"
-                  textGradient
-                >
-                  Iniciar Sesión
-                </MDTypography>
-              </MDTypography>
-            </MDBox>
-          </MDBox>
-        </MDBox>
+          </>
+        )}
       </Card>
     </CoverLayout>
   )
