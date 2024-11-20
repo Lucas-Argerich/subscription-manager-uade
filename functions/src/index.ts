@@ -6,9 +6,10 @@ import { onDocumentWritten } from 'firebase-functions/v2/firestore'
 import { onTaskDispatched } from 'firebase-functions/v2/tasks'
 import serviceAccount from './serviceAccountKey.json'
 
-const app = admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount as admin.ServiceAccount)
-})
+admin.initializeApp()
+const tokenServiceApp = admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount as admin.ServiceAccount),
+}, 'tokenServiceApp')
 
 export const createUserDocument = auth.user().onCreate((user) => {
   getFirestore()
@@ -125,12 +126,12 @@ export const verifyIdTokenAndCreateCustomToken = https.onCall(async (data) => {
 
   try {
     // Verify the ID token
-    const decodedToken = await app.auth().verifyIdToken(idToken)
+    const decodedToken = await tokenServiceApp.auth().verifyIdToken(idToken)
 
     const uid = decodedToken.uid
 
     // Generate a custom token based on the user's UID
-    const customToken = await app.auth().createCustomToken(uid)
+    const customToken = await tokenServiceApp.auth().createCustomToken(uid)
 
     // Return the custom token
     return { customToken: customToken }
