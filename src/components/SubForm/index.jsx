@@ -14,7 +14,7 @@ import {
 } from '@mui/material'
 import MDBox from '../MDBox'
 import useUser from '~/hooks/useUser'
-import { addDoc, collection } from 'firebase/firestore'
+import { addDoc, collection, doc, setDoc } from 'firebase/firestore'
 import { db } from '~/firebase'
 import MDTypography from '../MDTypography'
 
@@ -74,14 +74,16 @@ const SubForm = () => {
     }
 
     try {
-      const docRef = await addDoc(collection(db, 'users', user.uid, 'services'), {
+      const domain = formData.domain.replace('www.', '')
+      
+      await setDoc(doc(db, 'users', user.uid, 'services', domain), {
         serviceName: formData.service,
-        domain: formData.domain.trim().replace('https://', '').split('/')[0],
+        domain,
         username: formData.email,
         passwordEncrypted: formData.password, //to do
       })
 
-      await addDoc(collection(db, 'users', user.uid, 'services', docRef.id, 'subscriptions'), {
+      await addDoc(collection(db, 'users', user.uid, 'services', domain, 'subscriptions'), {
         plan: formData.plan,
         price: formData.fee,
         cycle: formData.cycle,
