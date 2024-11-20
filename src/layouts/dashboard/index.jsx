@@ -12,10 +12,6 @@ import ReportsBarChart from '~examples/Charts/BarCharts/ReportsBarChart'
 import ReportsLineChart from '~examples/Charts/LineCharts/ReportsLineChart'
 import ComplexStatisticsCard from '~examples/Cards/StatisticsCards/ComplexStatisticsCard'
 
-// Data
-import reportsBarChartData from '~layouts/dashboard/data/reportsBarChartData'
-import reportsLineChartData from '~layouts/dashboard/data/reportsLineChartData'
-
 // Dashboard components
 import Subscriptions from '~/layouts/dashboard/components/Subscriptions'
 import Expirations from '~/layouts/dashboard/components/Expirations'
@@ -24,28 +20,27 @@ import WeekendIcon from '@mui/icons-material/Weekend'
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney'
 import StoreIcon from '@mui/icons-material/Store'
 import useServices from '~/hooks/useServices'
+import { useMemo } from 'react'
 
 function Dashboard() {
   const services = useServices()
-  const { sales, tasks } = reportsLineChartData
+  console.log(services)
 
   const now = new Date()
 
-  console.log(services)
-
-  const thisYearServices = services?.filter((service) =>
+  const thisYearSubscriptions = services?.filter((service) =>
     service.subscriptions?.some(
       (sub) => new Date(sub.expiresAt).getFullYear() === now.getFullYear()
     )
   )
 
-  const lastYearServices = services?.filter((service) =>
+  const lastYearSubscriptions = services?.filter((service) =>
     service.subscriptions?.some(
       (sub) => new Date(sub.expiresAt).getFullYear() === now.getFullYear() - 1
     )
   )
 
-  const thisMonthServices = services?.filter((service) =>
+  const thisMonthSubscriptions = services?.filter((service) =>
     service.subscriptions?.some(
       (sub) =>
         new Date(sub.expiresAt).getFullYear() === now.getFullYear() &&
@@ -53,7 +48,7 @@ function Dashboard() {
     )
   )
 
-  const lastMonthServices = services?.filter((service) =>
+  const lastMonthSubscriptions = services?.filter((service) =>
     service.subscriptions?.some(
       (sub) =>
         new Date(sub.expiresAt).getFullYear() === now.getFullYear() &&
@@ -61,14 +56,14 @@ function Dashboard() {
     )
   )
 
-  const thisMonthTotalSum = thisMonthServices?.reduce(
+  const thisMonthTotalSum = thisMonthSubscriptions?.reduce(
     (sum, service) =>
       sum +
       ((price = parseInt(service.subscriptions[0]?.price)) => (Number.isNaN(price) ? 0 : price))(),
     0
   )
 
-  const lastMonthTotalSum = lastMonthServices?.reduce(
+  const lastMonthTotalSum = lastMonthSubscriptions?.reduce(
     (sum, service) =>
       sum +
       ((
@@ -83,7 +78,7 @@ function Dashboard() {
     0
   )
 
-  const thisYearTotalSum = thisYearServices?.reduce(
+  const thisYearTotalSum = thisYearSubscriptions?.reduce(
     (sum, service) =>
       sum +
       service.subscriptions
@@ -96,7 +91,7 @@ function Dashboard() {
     0
   )
 
-  const lastYearTotalSum = lastYearServices?.reduce(
+  const lastYearTotalSum = lastYearSubscriptions?.reduce(
     (sum, service) =>
       sum +
       service.subscriptions
@@ -109,6 +104,86 @@ function Dashboard() {
     0
   )
 
+  const loginsBarCharData = useMemo(() => {
+    const loginsPerDay = [0, 0, 0, 0, 0, 0, 0]
+    const dayShortNames = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb']
+
+    const todayIndex = now.getDay()
+    const relativeDayLabels = Array.from({ length: 7 }, (_, index) => {
+      const dayIndex = (todayIndex - 6 + index + 7) % 7
+      return dayShortNames[dayIndex]
+    })
+
+    const lastWeekLogins = services?.filter((service) =>
+      service.logins?.some((login) => {
+        const loginDate = new Date(login.timestamp.toMillis())
+        const diffInDays = Math.floor((now.getTime() - loginDate.getTime()) / (1000 * 60 * 60 * 24))
+        return diffInDays >= 0 && diffInDays < 7
+      })
+    )
+
+    lastWeekLogins?.forEach((service) => {
+      service.logins?.forEach((login) => {
+        const loginDate = new Date(login.timestamp.toMillis())
+        const diffInDays = Math.floor((now.getTime() - loginDate.getTime()) / (1000 * 60 * 60 * 24))
+
+        if (diffInDays >= 0 && diffInDays < 7) {
+          const relativeIndex = (6 - diffInDays) % 7
+          loginsPerDay[relativeIndex]++
+        }
+      })
+    })
+    
+    console.log('loginsPerDay', loginsPerDay)
+    // Return the data for the bar chart
+    return {
+      labels: relativeDayLabels,
+      datasets: { label: 'Logins', data: loginsPerDay }
+    }
+  }, [now, services])
+  
+  const monthlyExpensesBarChartData = useMemo(() => {
+    const now = new Date()
+
+    const expensesPerMonth = new Array(12).fill(0)
+    const monthShortNames = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']
+
+    const currentMonth = now.getMonth()
+    const relativeMonthLabels = Array.from({ length: 12 }, (_, index) => {
+      const monthIndex = (currentMonth - 11 + index + 12) % 12
+      return monthShortNames[monthIndex]
+    })
+
+    const lastYearSubscriptions = services?.filter((service) =>
+      service.subscriptions?.some((subscription) => {
+        const paymentDate = new Date(subscription.expiresAt)
+        const diffInMonths =
+          (now.getFullYear() - paymentDate.getFullYear()) * 12 +
+          (now.getMonth() - paymentDate.getMonth())
+        return diffInMonths >= 0 && diffInMonths < 12 && subscription.isPayed
+      })
+    )
+
+    lastYearSubscriptions?.forEach((service) => {
+      service.subscriptions?.forEach((subscription) => {
+        const paymentDate = new Date(subscription.expiresAt)
+        const diffInMonths =
+          (now.getFullYear() - paymentDate.getFullYear()) * 12 +
+          (now.getMonth() - paymentDate.getMonth())
+
+        if (diffInMonths >= 0 && diffInMonths < 12) {
+          const relativeIndex = 11 - diffInMonths
+          expensesPerMonth[relativeIndex] += parseInt(subscription.price)
+        }
+      })
+    })
+
+    return {
+      labels: relativeMonthLabels,
+      datasets: { label: 'Gastado ($)', data: expensesPerMonth }
+    }
+  }, [services])
+  
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -123,7 +198,7 @@ function Dashboard() {
                 count={services?.length}
                 percentage={{
                   color: 'success',
-                  amount: '+' + (thisYearServices?.length - lastYearServices?.length),
+                  amount: '+' + (thisYearSubscriptions?.length - lastYearSubscriptions?.length),
                   label: 'desde el año pasado'
                 }}
               />
@@ -164,22 +239,6 @@ function Dashboard() {
               />
             </MDBox>
           </Grid>
-          {/* <Grid item xs={12} md={6} lg={3}>
-            <MDBox mb={1.5}>
-              <ComplexStatisticsCard
-                color="primary"
-                icon={<StoreIcon fontSize="small" />}
-                title="Algo mas"
-                count="+91"
-                percentage={{
-                  color: 'success',
-                  amount: '',
-
-                  label: 'Just updated'
-                }}
-              />
-            </MDBox>
-          </Grid> */}
         </Grid>
         <MDBox mt={4.5}>
           <Grid container spacing={3}>
@@ -187,10 +246,10 @@ function Dashboard() {
               <MDBox mb={3}>
                 <ReportsBarChart
                   color="info"
-                  title="App mas utilizadas"
+                  title="Numero de Inicios de Sesión"
                   description="Frecuencia de uso"
                   date="Semanal"
-                  chart={reportsBarChartData}
+                  chart={loginsBarCharData}
                 />
               </MDBox>
             </Grid>
@@ -198,25 +257,10 @@ function Dashboard() {
               <MDBox mb={3}>
                 <ReportsLineChart
                   color="success"
-                  title="Costos mensuales"
-                  description={
-                    <>
-                      (<strong>+15%</strong>) desde el principio de año.
-                    </>
-                  }
+                  title="Gastos mensuales"
+                  description="Numero de Gastos por Cada Mes"
                   date="Principio de año"
-                  chart={sales}
-                />
-              </MDBox>
-            </Grid>
-            <Grid item xs={12} md={6} lg={4}>
-              <MDBox mb={3}>
-                <ReportsLineChart
-                  color="dark"
-                  title="Algo mas"
-                  description="Poner algo mas"
-                  date="Principio de año"
-                  chart={tasks}
+                  chart={monthlyExpensesBarChartData}
                 />
               </MDBox>
             </Grid>

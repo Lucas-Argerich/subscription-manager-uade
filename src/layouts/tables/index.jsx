@@ -31,6 +31,7 @@ function Tables() {
     { Header: 'Costo', accessor: 'cost', align: 'left' },
     { Header: 'Costo Acumulado', accessor: 'accumulated', align: 'left' },
     { Header: 'Plan', accessor: 'plan', align: 'center' },
+    { Header: 'Uso', accessor: 'use', align: 'center' },
     { Header: 'Cuenta', accessor: 'account', align: 'center' },
     { Header: 'Contraseña', accessor: 'password', align: 'center' },
     { Header: 'Seguridad credenciales', accessor: 'security', align: 'center' },
@@ -70,6 +71,11 @@ function Tables() {
         plan: (
           <MDTypography component="p" variant="caption" color="text" fontWeight="medium">
             {latestSubscription?.plan}
+          </MDTypography>
+        ),
+        use: (
+          <MDTypography component="p" variant="caption" color="text" fontWeight="medium">
+            {service.logins?.length} Logs
           </MDTypography>
         ),
         account: (
