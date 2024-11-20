@@ -3,7 +3,13 @@ import {
   getAuth,
   signInWithCustomToken
 } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js'
-import { getFirestore, getDoc, addDoc, doc, collection } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js'
+import {
+  getFirestore,
+  getDoc,
+  addDoc,
+  doc,
+  collection
+} from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js'
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDOpmn2oajHZ8USNXO6_3_uO-2LeH6OTGo',
@@ -84,7 +90,8 @@ chrome.runtime.onMessage.addListener((message) => {
 const handleLogWeb = async (details) => {
   const user = auth.currentUser
   if (!user || details.parentFrameId !== -1) return
-  const domain = new URL(details.url).hostname
+  const domain = ((url = new URL(details.url).hostname) =>
+    url.startsWith('www.') ? url.split('.').slice(1).join('.') : url)()
   console.log('app detected', domain)
 
   const ref = await getDoc(doc(db, 'users', user.uid, 'services', domain))
