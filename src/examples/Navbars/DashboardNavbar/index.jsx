@@ -100,7 +100,9 @@ function DashboardNavbar({ absolute, light, isMini }) {
         {isMini ? null : (
           <MDBox sx={(theme) => navbarRow(theme, { isMini })}>
             <MDBox color={light ? 'white' : 'inherit'}>
+              <a href='https://chromewebstore.google.com/category/extensions' target='_blank'>
               <MDButton color="info">INSTALAR EXTENSIÓN</MDButton>
+              </a>
               {renderMenu()}
             </MDBox>
           </MDBox>

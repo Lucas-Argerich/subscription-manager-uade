@@ -105,6 +105,7 @@ function Dashboard() {
   )
 
   const loginsBarCharData = useMemo(() => {
+    const now = new Date()
     const loginsPerDay = [0, 0, 0, 0, 0, 0, 0]
     const dayShortNames = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb']
 
@@ -140,7 +141,7 @@ function Dashboard() {
       labels: relativeDayLabels,
       datasets: { label: 'Logins', data: loginsPerDay }
     }
-  }, [now, services])
+  }, [services])
   
   const monthlyExpensesBarChartData = useMemo(() => {
     const now = new Date()
@@ -195,7 +196,7 @@ function Dashboard() {
                 color="dark"
                 icon={<WeekendIcon fontSize="small" />}
                 title="Suscripciones"
-                count={services?.length}
+                count={services?.length ?? 0}
                 percentage={{
                   color: 'success',
                   amount: '+' + (thisYearSubscriptions?.length - lastYearSubscriptions?.length),
@@ -209,7 +210,7 @@ function Dashboard() {
               <ComplexStatisticsCard
                 icon={<AttachMoneyIcon fontSize="small" />}
                 title="Costo Mensual"
-                count={'$' + thisMonthTotalSum}
+                count={'$' + (thisMonthTotalSum ?? 0)}
                 percentage={((
                   val = ((thisMonthTotalSum - lastMonthTotalSum) / Math.max(lastMonthTotalSum, 1)) *
                     100
@@ -227,7 +228,7 @@ function Dashboard() {
                 color="success"
                 icon={<StoreIcon fontSize="small" />}
                 title="Costos del Año"
-                count={'$' + thisYearTotalSum}
+                count={'$' + (thisYearTotalSum ?? 0)}
                 percentage={((
                   val = ((thisYearTotalSum - lastYearTotalSum) / Math.max(lastYearTotalSum, 1)) *
                     100
