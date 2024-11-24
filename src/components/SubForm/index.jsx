@@ -65,9 +65,7 @@ const SubForm = () => {
       !formData.plan ||
       !formData.expiration ||
       (!formData.fee && formData.plan !== 'free') ||
-      (!formData.cycle && formData.plan !== 'free') ||
-      !formData.email ||
-      !formData.password
+      (!formData.cycle && formData.plan !== 'free')
     ) {
       setError('Please. Complete all the inputs.')
       return
@@ -78,9 +76,7 @@ const SubForm = () => {
       
       await setDoc(doc(db, 'users', user.uid, 'services', domain), {
         serviceName: formData.service,
-        domain,
-        username: formData.email,
-        passwordEncrypted: formData.password, //to do
+        domain
       })
 
       await addDoc(collection(db, 'users', user.uid, 'services', domain, 'subscriptions'), {
